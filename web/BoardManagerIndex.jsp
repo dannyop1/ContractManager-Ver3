@@ -1,6 +1,6 @@
 <%-- 
-    Document   : AdminIndex
-    Created on : Mar 16, 2023, 9:41:20 PM
+    Document   : BoardManagerIndex
+    Created on : Mar 17, 2023, 4:25:35 AM
     Author     : mical
 --%>
 
@@ -13,9 +13,9 @@
         <title>Admin</title>
     </head>
     <body>
+        <h1>Welcome, ${sessionScope.user.getFullName()}</h1>
         <c:set var="user" value="${sessionScope.user}"></c:set>
-        <c:if test="${(user.getAID()) != null}">
-            <h1>Welcome, ${sessionScope.user.fullName}</h1>
+        <c:if test="${user.getBID() != null}">
             <form action="MainController" method="POST">
                 <input type="submit" value="Log out" name="action" />
             </form>
@@ -29,16 +29,11 @@
             ${requestScope.contractUnavaiable}
             ${revenue}
             <a href="MainController?action=View+Profile">Profile</a>
-            
         </c:if>
 
-
-
-
-        <c:if test="${(user.getAID()) == null}">
+        <c:if test="${user.getBID() == null}">
             <h1>Access Denied</h1>
             <a href="LoginIndex.jsp">Back to login page</a>
-        </c:if>    
-
+        </c:if>
     </body>
 </html>
