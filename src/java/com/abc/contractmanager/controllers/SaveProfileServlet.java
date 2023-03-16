@@ -149,13 +149,13 @@ public class SaveProfileServlet extends HttpServlet {
                     switch (userType) {
                         case ('A'):
                             user = (AdminDTO) request.getSession().getAttribute("user");
-                            AdminDAO.updateAdmin(Integer.parseInt(CID), fullName, address, ((AdminDTO) user).getAID());
-                            user = UserDAO.getUserByUID(((UserDTO) user).getUID());
+                            AdminDAO.updateAdmin(CID, fullName, address, ((AdminDTO) user).getAID());
+                            user = AdminDAO.getAdminDetail(((AdminDTO)user).getAID());
                             break;
                         case ('B'):
                             user = (OwnerDTO) request.getSession().getAttribute("user");
-                            BoardManagerDAO.updateAdmin(Integer.parseInt(CID), fullName, address, ((BoardManagerDTO) user).getBID());
-                            user = OwnerDAO.getOwnerByOID(((OwnerDTO) user).getOID());
+                            BoardManagerDAO.updateAdmin(CID, fullName, address, ((BoardManagerDTO) user).getBID());
+                            user = BoardManagerDAO.getAccount(((BoardManagerDTO)user).getEmail());
                             break;
                     }
                     request.setAttribute("noti", "Update profile success!");
@@ -165,8 +165,9 @@ public class SaveProfileServlet extends HttpServlet {
 //            out.print("<p>"+user.toString()+"</p>");
 //            CustomerDTO newuser = CustomerDAO.searchAccount(1);
 //            out.print("<p>"+newuser.toString()+"</p>");
-                request.getRequestDispatcher("ViewSelfProfileServlet").forward(request, response);
+                
             }
+            request.getRequestDispatcher("ViewSelfProfileServlet").forward(request, response);
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

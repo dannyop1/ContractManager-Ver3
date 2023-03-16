@@ -5,8 +5,12 @@
  */
 package com.abc.contractmanager.controllers;
 
+import com.abc.contractmanager.dao.AdminDAO;
+import com.abc.contractmanager.dao.BoardManagerDAO;
 import com.abc.contractmanager.dao.OwnerDAO;
 import com.abc.contractmanager.dao.UserDAO;
+import com.abc.contractmanager.dto.AdminDTO;
+import com.abc.contractmanager.dto.BoardManagerDTO;
 import com.abc.contractmanager.dto.OwnerDTO;
 import com.abc.contractmanager.dto.UserDTO;
 import java.io.IOException;
@@ -41,9 +45,9 @@ public class ChangePassLoggedInServlet extends HttpServlet {
             String password = request.getParameter("oldPasstxt");
             String newPass = request.getParameter("newPasstxt");
             String confirm = request.getParameter("confirmPasstxt");
+            String durl = request.getParameter("durl");
             char role = ((String) request.getSession().getAttribute("userType")).charAt(0);
             Object user = request.getSession().getAttribute("user");
-            String url = "users-profile.jsp";
             boolean fault = false;
             if (!txtpass.equals(password)) {
                 fault = true;
@@ -58,21 +62,34 @@ public class ChangePassLoggedInServlet extends HttpServlet {
             if (!fault) {
                 switch (role) {
                     case 'U':
-                        UserDAO.changePass(newPass, ((UserDTO)user).getEmail());
+                        UserDAO.changePass(newPass, ((UserDTO) user).getEmail());
                         request.setAttribute("noti", "Change password successfully!");
                         user = (UserDTO) request.getSession().getAttribute("user");
-                        user = UserDAO.getUserByUID(((UserDTO)user).getUID());
+                        user = UserDAO.getUserByUID(((UserDTO) user).getUID());
                         break;
                     case 'O':
-                        OwnerDAO.changePass(newPass, email);
+                        OwnerDAO.changePass(newPass, ((OwnerDTO) user).getEmail());
                         request.setAttribute("noti", "Change password successfully!");
                         user = (OwnerDTO) request.getSession().getAttribute("user");
-                        user = OwnerDAO.getOwnerByOID(((OwnerDTO)user).getOID());
+                        user = OwnerDAO.getOwnerByOID(((OwnerDTO) user).getOID());
                         break;
+                    case 'A':
+                        AdminDAO.changePass(newPass, ((AdminDTO) user).getEmail());
+                        request.setAttribute("noti", "Change password successfully!");
+                        user = (AdminDTO) request.getSession().getAttribute("user");
+                        user = AdminDAO.getAdminDetail(((AdminDTO) user).getAID());
+                        break;
+                    case 'B':
+                        BoardManagerDAO.changePass(newPass, ((BoardManagerDTO) user).getEmail());
+                        request.setAttribute("noti", "Change password successfully!");
+                        user = (BoardManagerDTO) request.getSession().getAttribute("user");
+                        user = BoardManagerDAO.getAccount(((BoardManagerDTO) user).getEmail());
+                        break;
+
                 }
             }
             request.getSession().setAttribute("user", user);
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher(durl).forward(request, response);
         }
     }
 

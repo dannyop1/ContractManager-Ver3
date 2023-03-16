@@ -303,9 +303,9 @@
                     <a class="nav-link collapsed" href="ViewAllUser.jsp">
                         <i class="bi bi-layout-text-window-reverse"></i><span>All user on sever</span>
                     </a>
-                    
+
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="MainController?action=Search+Contract&durl=ViewAllContract.jsp?userType=A">
                         <i class="bi bi-person"></i>
@@ -385,6 +385,7 @@
                                             <div class="col-lg-3 col-md-4 label">Email</div>
                                             <div class="col-lg-9 col-md-8">${sessionScope.user.getEmail()}</div>
                                         </div>
+                                        ${requestScope.noti}
                                     </div>
                                     <!-- Profile Edit Form -->
                                     <c:set var="profileType" value="${requestScope.profileType}"></c:set>
@@ -411,43 +412,15 @@
                                                             <input name="txtFullName" type="text" class="form-control" id="fullName" value="${sessionScope.user.getFullName()}">
                                                             ${requestScope.nameError}
                                                         </div> 
+                                                    </div> 
+                                                    <div class="row mb-3">
+                                                        <label for="txtcid" class="col-md-4 col-lg-3 col-form-label ">CID</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <input name="txtcid" type="text" class="form-control" id="txtcid" value="${requestScope.viewProfile.getCID()}">
+                                                            ${requestScope.CIDError}
+                                                        </div>
                                                     </div>
-                                                    <c:if test="${(profileType == 'C')}">   
-                                                        <div class="row mb-3">
-                                                            <label for="txtcid" class="col-md-4 col-lg-3 col-form-label ">CID</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="txtcid" type="text" class="form-control" id="txtcid" value="${requestScope.viewProfile.getCCID()}">
-                                                                ${requestScope.CIDError}
-                                                            </div>
-                                                        </div>
-                                                    </c:if>
-                                                    <c:if test="${(profileType == 'O')}">   
-                                                        <div class="row mb-3">
-                                                            <label for="txtcid" class="col-md-4 col-lg-3 col-form-label">CID</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="txtcid" type="text" class="form-control" id="txtcid" value="${requestScope.viewProfile.getCID()}">
-                                                                ${requestScope.CIDError}
-                                                            </div>
-                                                        </div>
-                                                    </c:if>
-                                                    <c:if test="${(profileType == 'R')}">   
-                                                        <div class="row mb-3">
-                                                            <label for="txtcid" class="col-md-4 col-lg-3 col-form-label">CID</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="txtcid" type="text" class="form-control" id="txtcid" value="${requestScope.viewProfile.getRCID()}">
-                                                                ${requestScope.CIDError}
-                                                            </div>
-                                                        </div>
-                                                    </c:if>
-                                                    <c:if test="${(profileType == 'S')}">   
-                                                        <div class="row mb-3">
-                                                            <label for="txtcid" class="col-md-4 col-lg-3 col-form-label">CID</label>
-                                                            <div class="col-md-8 col-lg-9">
-                                                                <input name="txtcid" type="text" class="form-control" id="txtcid" value="${requestScope.viewProfile.getSCID()}">
-                                                                ${requestScope.CIDError}
-                                                            </div>
-                                                        </div>
-                                                    </c:if>
+
                                                     <div class="row mb-3">
                                                         <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                                                         <div class="col-md-8 col-lg-9">
@@ -464,7 +437,6 @@
                                                     <div class="text-center">
                                                         <button type="submit" name="action" value="Save Profile" class="btn btn-primary">Save Changes</button>
                                                     </div>
-                                                    ${requestScope.noti} 
                                                 </form>
 
 
@@ -504,9 +476,7 @@
                                                 </div>
                                                 <input type="hidden" name="txtPassword" value="${sessionScope.user.getPassword()}"/>
                                                 <input type="hidden" name="action" value="userChangePass"/>
-
-
-                                                ${requestScope.noti} 
+                                                <input type="hidden" name="durl" value="AdminProfile.jsp"/>
                                             </div>  
                                     </div>   
                                     </form>

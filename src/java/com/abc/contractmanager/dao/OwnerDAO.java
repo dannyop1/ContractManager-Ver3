@@ -39,10 +39,6 @@ public class OwnerDAO {
         return owner;
     }
     
-    public static void main(String[] args) {
-        System.out.println(getOwnerByEmailAndPassword("RonaldoJr@gmail.com", "123").toString());
-    }
-    
     public static OwnerDTO getOwnerByEmail(String email){
         OwnerDTO owner = null;
         try {
@@ -95,19 +91,23 @@ public class OwnerDAO {
         return result;
     }
     
-    public static int updateProfile(String name, Date dob, String address, String CID, int UID){
+    public static void main(String[] args) {
+        System.out.println(changePass("1234567", "owner@gmail.com"));
+    }
+    
+    public static int updateProfile(String name, Date dob, String address, String CID, int OID){
         int result = 0;
         try {
             Connection cn = DBUtils.getConnection();
             String sql = "UPDATE [dbo].[Owner] \n"
                     + "set [Fullname] = ?, [DateOfBirth] = ?, [Address] = ?, [CID] = ?\n"
-                    + "where UID = ?";
+                    + "where [OID] = ?";
             PreparedStatement pr = cn.prepareStatement(sql);
             pr.setString(1, name);
             pr.setDate(2, dob);
             pr.setString(3, address);
             pr.setString(4, CID);
-            pr.setInt(5, UID);
+            pr.setInt(5, OID);
             result = pr.executeUpdate();
             cn.close();
         } catch (Exception e) {

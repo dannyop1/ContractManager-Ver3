@@ -392,7 +392,9 @@
                                             <div class="col-lg-3 col-md-4 label">Email</div>
                                             <div class="col-lg-9 col-md-8">${sessionScope.user.getEmail()}</div>
                                         </div>
+                                        ${requestScope.noti}
                                     </div>
+                                        
                                     <!-- Profile Edit Form -->
                                     <c:set var="profileType" value="${requestScope.profileType}"></c:set>
                                     <c:set var="edit" value="${requestScope.edit}"></c:set>
@@ -486,7 +488,6 @@
                                                     <div class="text-center">
                                                         <button type="submit" name="action" value="Save Profile" class="btn btn-primary">Save Changes</button>
                                                     </div>
-                                                    ${requestScope.noti} 
                                                 </form>
 
 
@@ -525,10 +526,11 @@
                                                     <button type="submit" value="Change password" class="btn btn-primary">Change Password</button>
                                                 </div>
                                                 <input type="hidden" name="txtPassword" value="${sessionScope.user.getPassword()}"/>
+                                                <input type="hidden" name="durl" value="OwnerProfile.jsp"/>
                                                 <input type="hidden" name="action" value="userChangePass"/>
 
 
-                                                ${requestScope.noti} 
+                                                 
                                             </div>  
                                     </div>   
                                     </form>

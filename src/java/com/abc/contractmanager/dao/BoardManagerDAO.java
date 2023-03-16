@@ -58,7 +58,43 @@ public class BoardManagerDAO {
         return boardManager;
     }
     
-    public static int updateAdmin(int cid, String name, String address, int AID) {
+    public static int changePass(String newPass, String email) {
+        int result = 0;
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "update [dbo].[BoardManager] set password=? where email=?";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setString(1, newPass);
+            pr.setString(2, email);
+            result = pr.executeUpdate();
+            cn.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    
+    public static BoardManagerDTO getAccount(int BID) {
+        BoardManagerDTO boardManager = null;
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "Select * from BoardManager where [BID]=? and   status=1";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setInt(1, BID);
+
+            ResultSet rs = pr.executeQuery();
+            if (rs.next()) {
+                boardManager = new BoardManagerDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
+            }
+            cn.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return boardManager;
+    }
+    
+    public static int updateAdmin(String cid, String name, String address, int AID) {
         int result = 0;
         try {
             Connection cn = DBUtils.getConnection();
@@ -66,7 +102,7 @@ public class BoardManagerDAO {
                     + "SET [CID] = ?, [Fullname] = ?, [Address]= ?\n"
                     + "WHERE [BID]= ?";
             PreparedStatement pr = cn.prepareStatement(sql);
-            pr.setInt(1, cid);
+            pr.setString(1, cid);
             pr.setString(2, name);
             pr.setString(3, address);
             pr.setInt(4, AID);

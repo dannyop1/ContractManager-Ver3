@@ -103,13 +103,13 @@ public class AdminDAO {
 //    public static void main(String[] args) {
 //        System.out.println(getAdminList());
 //    }
-    public static AdminDTO getAdminDetail(String id) {
+    public static AdminDTO getAdminDetail(int id) {
         AdminDTO admin = null;
         try {
             Connection cn = DBUtils.getConnection();
             String sql = "Select * from Admin where AID=?";
             PreparedStatement pr = cn.prepareStatement(sql);
-            pr.setString(1, id);
+            pr.setInt(1, id);
             ResultSet rs = pr.executeQuery();
             if (rs.next()) {
 
@@ -123,8 +123,25 @@ public class AdminDAO {
 
         return admin;
     }
+    
+    public static int changePass(String newPass, String email) {
+        int result = 0;
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "update [dbo].[Admin] set password=? where email=?";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setString(1, newPass);
+            pr.setString(2, email);
+            result = pr.executeUpdate();
+            cn.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
-    public static int updateAdmin(int cid, String name, String address, int AID) {
+
+    public static int updateAdmin(String cid, String name, String address, int AID) {
         int result = 0;
         try {
             Connection cn = DBUtils.getConnection();
@@ -132,7 +149,7 @@ public class AdminDAO {
                     + "SET [CID] = ?, [Fullname] = ?, [Address]= ?\n"
                     + "WHERE [AID]= ?";
             PreparedStatement pr = cn.prepareStatement(sql);
-            pr.setInt(1, cid);
+            pr.setString(1, cid);
             pr.setString(2, name);
             pr.setString(3, address);
             pr.setInt(4, AID);
