@@ -375,7 +375,7 @@
                                     <p class="card-text"><b>BETWEEN:</b> ${contract.getUName()} and ${contract.getOName()} </p>
                                     <p class="card-text"><b>EXPIRED DATE:</b> ${contract.getEndDate()}  </p>
                                     <p class="card-text"><b>Rental fee:</b> $${contract.getRentalFee()}/month</p>
-                                    <input class="btn btn-primary" type="button" onclick="location.href = 'MainController?action=ViewContract&id=${contract.getCoID()}';" value="View contract detail" />
+                                    <input class="btn btn-primary" type="button" onclick="location.href = 'MainController?action=ViewContract&id=${contract.getCoID()}';" value="DETAIL" />
                                 </div>
                             </div>
                         </div>

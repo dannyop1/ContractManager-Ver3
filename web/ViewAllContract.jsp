@@ -363,14 +363,9 @@
 
                     <!-- Card with an image on top -->
                     <div class="card">
-                        <c:if test="${counter.count%6 == 0}"><img src="assets/img/card.jpg" class="card-img-top" alt="..."></c:if>
-                        <c:if test="${counter.count%6 == 1}"><img src="assets/img/card1.jpg" class="card-img-top" alt="..."></c:if>
-                        <c:if test="${counter.count%6 == 2}"><img src="assets/img/card2.jpg" class="card-img-top" alt="..."></c:if>
-                        <c:if test="${counter.count%6 == 3}"><img src="assets/img/card3.jpg" class="card-img-top" alt="..."></c:if>
-                        <c:if test="${counter.count%6 == 4}"><img src="assets/img/card4.jpg" class="card-img-top" alt="..."></c:if>
-                        <c:if test="${counter.count%6 == 5}"><img src="assets/img/card5.jpg" class="card-img-top" alt="..."></c:if>
-                            <div class="card-body">
-                                <h5 class="card-title">Contract's name: ${contract.getName()}</h5>                                    
+                        <div class="card-body">
+                            <p>${contract.getCoID()}</p>
+                            <h5 class="card-title">Contract's name: ${contract.getName()}</h5>                                    
                             <p class="card-text"><b>BETWEEN:</b> ${contract.getUName()} and ${contract.getOName()} </p>
                             <p class="card-text"><b>START DATE:</b> ${contract.getCreateDate()}       <b>END DATE:</b> ${contract.getEndDate()}  </p>
                             <p class="card-text"><b>Rental fee:</b> $${contract.getRentalFee()}</p>
