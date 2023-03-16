@@ -22,6 +22,7 @@ public class OwnerDTO {
     private String avatar;
     private String address;
     private int status;
+    
 
     public OwnerDTO() {
     }

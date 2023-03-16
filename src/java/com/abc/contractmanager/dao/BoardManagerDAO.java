@@ -35,6 +35,9 @@ public class BoardManagerDAO {
         }
         return boardManager;
     }
+    public static void main(String[] args) {
+        System.out.println(getAccount("chutich@gmail.com","123").toString());;
+    }
 
     public static BoardManagerDTO getAccount(String email) {
         BoardManagerDTO boardManager = null;
@@ -73,9 +76,5 @@ public class BoardManagerDAO {
             e.printStackTrace();
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getAccount("hoidonga@gmail.com", "123").getFullName());
     }
 }

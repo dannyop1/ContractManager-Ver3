@@ -39,6 +39,10 @@ public class OwnerDAO {
         return owner;
     }
     
+    public static void main(String[] args) {
+        System.out.println(getOwnerByEmailAndPassword("RonaldoJr@gmail.com", "123").toString());
+    }
+    
     public static OwnerDTO getOwnerByEmail(String email){
         OwnerDTO owner = null;
         try {
@@ -188,9 +192,6 @@ public class OwnerDAO {
             e.printStackTrace();
         }
         return result;
-    }
-    public static void main(String[] args) {
-        System.out.println(getOwnerByOID(1));
     }
     
     public static int insertOwner(String email, String password, String cid, String phone, String name, String dob, String address) {

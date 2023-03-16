@@ -29,15 +29,15 @@ public class ContractDAO {
             if (cn != null) {
                 String sql = "select [dbo].[Contract].[CoID], [dbo].[Contract].[RoID], [dbo].[Contract].[UID], [dbo].[User].[Fullname],\n"
                         + "[dbo].[Contract].[OID], [dbo].[Owner].[Fullname], [RentalFee], [SystemFee], [CreateDate],\n"
-                        + "[EndDate], [EndDate], [Description], [dbo].[Contract].[Status]\n"
+                        + "[EndDate], [Name], [Description], [dbo].[Contract].[Status]\n"
                         + "from [dbo].[Contract]\n"
                         + "left join [dbo].[ContractInformation] on Contract.[CoID] = [dbo].[ContractInformation].[CoID] \n"
                         + "left join [dbo].[User] on [dbo].[Contract].UID = [dbo].[User].UID\n"
                         + "left join [dbo].[Owner] on [dbo].[Contract].[OID] = [dbo].[Owner].[OID]";
                 if (userType == 'U') {
-                    sql = sql + " where Contract.[UID]=?";
+                    sql = sql + " where [dbo].[Contract].[UID]=?";
                 } else {
-                    sql = sql + " where Contract.[OID]=?";
+                    sql = sql + " where [dbo].[Contract].[OID]=?";
                 }
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setInt(1, id);
@@ -64,7 +64,7 @@ public class ContractDAO {
             if (cn != null) {
                 String sql = "select [dbo].[Contract].[CoID], [dbo].[Contract].[RoID], [dbo].[Contract].[UID], [dbo].[User].[Fullname],\n"
                         + "[dbo].[Contract].[OID], [dbo].[Owner].[Fullname], [RentalFee], [SystemFee], [CreateDate],\n"
-                        + "[EndDate], [EndDate], [Description], [dbo].[Contract].[Status]\n"
+                        + "[EndDate], [dbo].[Contract].[Name], [Description], [dbo].[Contract].[Status]\n"
                         + "from [dbo].[Contract]\n"
                         + "left join [dbo].[ContractInformation] on Contract.[CoID] = [dbo].[ContractInformation].[CoID] \n"
                         + "left join [dbo].[User] on [dbo].[Contract].UID = [dbo].[User].UID\n"
@@ -92,7 +92,7 @@ public class ContractDAO {
             if (cn != null) {
                 String sql = "select [dbo].[Contract].[CoID], [dbo].[Contract].[RoID], [dbo].[Contract].[UID], [dbo].[User].[Fullname],\n"
                         + "[dbo].[Contract].[OID], [dbo].[Owner].[Fullname], [RentalFee], [SystemFee], [CreateDate],\n"
-                        + "[EndDate], [EndDate], [Description], [dbo].[Contract].[Status]\n"
+                        + "[EndDate], [dbo].[Contract].[Name], [Description], [dbo].[Contract].[Status]\n"
                         + "from [dbo].[Contract]\n"
                         + "left join [dbo].[ContractInformation] on Contract.[CoID] = [dbo].[ContractInformation].[CoID] \n"
                         + "left join [dbo].[User] on [dbo].[Contract].UID = [dbo].[User].UID\n"
