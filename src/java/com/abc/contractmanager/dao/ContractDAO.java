@@ -64,7 +64,7 @@ public class ContractDAO {
             if (cn != null) {
                 String sql = "select [dbo].[Contract].[CoID], [dbo].[Contract].[RoID], [dbo].[Contract].[UID], [dbo].[User].[Fullname],\n"
                         + "[dbo].[Contract].[OID], [dbo].[Owner].[Fullname], [RentalFee], [SystemFee], [CreateDate],\n"
-                        + "[EndDate], [dbo].[Contract].[Name], [Description], [dbo].[Contract].[Status]\n"
+                        + "[EndDate], [Name], [Description], [dbo].[Contract].[Status]\n"
                         + "from [dbo].[Contract]\n"
                         + "left join [dbo].[ContractInformation] on Contract.[CoID] = [dbo].[ContractInformation].[CoID] \n"
                         + "left join [dbo].[User] on [dbo].[Contract].UID = [dbo].[User].UID\n"
@@ -212,7 +212,7 @@ public class ContractDAO {
                         + "from [dbo].[Contract]\n"
                         + "left join [dbo].[ContractInformation] on Contract.[CoID] = [dbo].[ContractInformation].[CoID] \n"
                         + "left join [dbo].[User] on [dbo].[Contract].UID = [dbo].[User].UID\n"
-                        + "left join [dbo].[Owner] on [dbo].[Contract].[OID] = [dbo].[Owner].[OID]";
+                        + "left join [dbo].[Owner] on [dbo].[Contract].[OID] = [dbo].[Owner].[OID] ";
                 switch (userType) {
                     case 'U':
                         sql = sql + "where Contract.[UID]=? and \n"
@@ -226,7 +226,7 @@ public class ContractDAO {
                 sql = sql + " or [dbo].[ContractInformation].[Name] like ?)";
                 if (from != null) {
                     if (to != null) {
-                        sql = sql + " and ([createDate]>=? or [endDate] <=?)";
+                        sql = sql + " and ([createDate]>=? and [createDate]<=?)";
                         type = 3;
                     } else {
                         sql = sql + " and ([createDate]>=?)";
@@ -234,7 +234,7 @@ public class ContractDAO {
                     }
                 } else {
                     if (to != null) {
-                        sql = sql + " and ([endDate] <=?)";
+                        sql = sql + " and ([createDate] <=?)";
                         type = 1;
                     } else {
                         sql = sql + "";
@@ -508,7 +508,7 @@ public class ContractDAO {
     }
 
     public static void main(String[] args) {
-        System.out.println(countContract('R', 1));
+        System.out.println(getContracts().size());
     }
 
 }

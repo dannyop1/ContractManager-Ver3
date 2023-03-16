@@ -5,20 +5,25 @@
  */
 package com.abc.contractmanager.controllers;
 
-import com.abc.contractmanager.dao.AdminDAO;
-import com.abc.contractmanager.dto.AdminDTO;
+import com.abc.contractmanager.dao.ContractDAO;
+import com.abc.contractmanager.dto.ContractDTO;
+import com.abc.contractmanager.dto.OwnerDTO;
+import com.abc.contractmanager.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author mical
  */
-public class ViewAdminServlet extends HttpServlet {
+public class SearchContractForAdminServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +39,36 @@ public class ViewAdminServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String id = request.getParameter("id");
-            AdminDTO admin = AdminDAO.getAdminDetail(Integer.parseInt(id));
-            request.setAttribute("admin", admin);
-            request.getRequestDispatcher("AdminDetail.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            String url = request.getParameter("durl");
+            ArrayList<ContractDTO> listContract = new ArrayList<>();
+            char userType = ((String) session.getAttribute("userType")).charAt(0);
+            int status = Integer.parseInt(request.getParameter("txtStatus"));
+            String name = request.getParameter("txtSearchName");
+            request.setAttribute("txtSearchName", name);
+            String txtFrom = request.getParameter("txtFromDate");
+            String txtTo = request.getParameter("txtToDate");
+            Date from = null;
+            Date to = null;
+            if (txtFrom != null && !(txtFrom.equals(""))) {
+                from = Date.valueOf(request.getParameter("txtFromDate"));
+                request.setAttribute("txtFromDate", from);
+            }
+            if (txtTo != null && !(txtTo.equals(""))) {
+                to = Date.valueOf(request.getParameter("txtToDate"));
+                request.setAttribute("txtToDate", to);
+            }
+            request.setAttribute("txtStatus", status);
+            int userID = 0;
+            switch (userType) {
+                case ('U'):
+                    userID = ((UserDTO) session.getAttribute("user")).getUID();
+                    break;
+                case ('O'):
+                    userID = ((OwnerDTO) session.getAttribute("user")).getOID();
+                    break;
+            }
+            listContract = ContractDAO.searchContract(name, from, to, userID, userType, status);
         }
     }
 

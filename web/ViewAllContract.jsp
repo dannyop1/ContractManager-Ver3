@@ -345,7 +345,7 @@
                     </select></div>
                 <div class="col-lg-2">
                     <label  class="form-label">User</label> 
-                    <select class="form-control" name="txtStatus">
+                    <select class="form-control" name="">
                         <option value="-1" selected="selected">All</option>
                         <option value="0">Customer</option>
                         <option value="1">Resident</option>
