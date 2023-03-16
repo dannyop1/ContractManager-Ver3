@@ -389,6 +389,98 @@ public class ContractDAO {
         return result;
     }
 
+    public static ArrayList<ContractDTO> searchContract2(String name, Date from, Date to, char userType, int Status) {
+        if (name == null) {
+            name = "";
+        }
+        ArrayList<ContractDTO> result = new ArrayList<>();
+        Connection cn = null;
+        int type = 0;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "select [dbo].[Contract].[CoID], [dbo].[Contract].[RoID], [dbo].[Contract].[UID], [dbo].[User].[Fullname],\n"
+                        + "[dbo].[Contract].[OID], [dbo].[Owner].[Fullname], [RentalFee], [SystemFee], [CreateDate],\n"
+                        + "[EndDate], [Name], [Description], [dbo].[Contract].[Status]\n"
+                        + "from [dbo].[Contract]\n"
+                        + "left join [dbo].[ContractInformation] on Contract.[CoID] = [dbo].[ContractInformation].[CoID] \n"
+                        + "left join [dbo].[User] on [dbo].[Contract].UID = [dbo].[User].UID\n"
+                        + "left join [dbo].[Owner] on [dbo].[Contract].[OID] = [dbo].[Owner].[OID] ";
+                switch (userType) {
+                    case 'O':
+                        sql = sql + "where "
+                                + "([dbo].[User].[Fullname] like ?";
+                        break;
+                    default:
+                        sql = sql + "where "
+                                + "([dbo].[Owner].[Fullname] like ?";
+                        break;
+                }
+                sql = sql + " or [dbo].[ContractInformation].[Name] like ?)";
+                if (from != null) {
+                    if (to != null) {
+                        sql = sql + " and ([createDate]>=? and [createDate]<=?)";
+                        type = 3;
+                    } else {
+                        sql = sql + " and ([createDate]>=?)";
+                        type = 2;
+                    }
+                } else {
+                    if (to != null) {
+                        sql = sql + " and ([createDate] <=?)";
+                        type = 1;
+                    } else {
+                        sql = sql + "";
+                    }
+                }
+                if (Status != -1) {
+                    sql = sql + " and [Contract].[status] = ?";
+                }
+                if(userType == 'C') sql = sql + " and [User].[Type]=0";
+                else if(userType == 'R') sql = sql + " and [User].[Type]=1";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, "%" + name + "%");
+                pst.setString(2, "%" + name + "%");
+                switch (type) {
+                    case 3:
+                        pst.setDate(3, from);
+                        pst.setDate(4, to);
+                        if (Status != -1) {
+                            pst.setInt(5, Status);
+                        }
+                        break;
+                    case 2:
+                        pst.setDate(3, from);
+                        if (Status != -1) {
+                            pst.setInt(4, Status);
+                        }
+                        break;
+                    case 1:
+                        pst.setDate(3, to);
+                        if (Status != -1) {
+                            pst.setInt(4, Status);
+                        }
+                        break;
+                    case 0:
+                        if (Status != -1) {
+                            pst.setInt(3, Status);
+                        }
+                }
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        ContractDTO nw = new ContractDTO(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getDate(9), rs.getDate(10), rs.getString(11), rs.getString(12), rs.getInt(13));
+                        result.add(nw);
+                    }
+                }
+                cn.close();
+            }
+        } catch (Exception e) {
+            e.getCause();
+        }
+        return result;
+    }
+
     public static void createContract(int RoID, int UID, int OID, int rentalFee, int systemFee, Date from, Date to, String name, String description) {
         Connection cn = null;
         try {

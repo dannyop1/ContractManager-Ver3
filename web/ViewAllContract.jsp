@@ -345,16 +345,17 @@
                     </select></div>
                 <div class="col-lg-2">
                     <label  class="form-label">User</label> 
-                    <select class="form-control" name="">
-                        <option value="-1" selected="selected">All</option>
-                        <option value="0">Customer</option>
-                        <option value="1">Resident</option>
-                        <option value="2">Owner</option>
+                    <select class="form-control" name="txtUserType">
+                        <option value="A" selected="selected">All</option>
+                        <option value="C">Customer</option>
+                        <option value="R">Resident</option>
+                        <option value="O">Owner</option>
                     </select></div>
                 <input type="hidden" name="durl" value="ViewAllContract.jsp"/>
                 <div class="col-lg-2">
                     <label  class="form-label">Search</label> 
-                    <input class="btn btn-primary" type="submit" name="action" value="Search Contract"/></div>
+                    <input type="hidden" name="action" value="SearchAllContract"/>
+                    <input class="btn btn-primary" type="submit" value="Search Contract"/></div>
             </form>
             <c:forEach var="contract" varStatus="counter" items="${requestScope.contractList}">
 
