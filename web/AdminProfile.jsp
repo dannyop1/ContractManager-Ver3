@@ -385,7 +385,7 @@
                                             <div class="col-lg-3 col-md-4 label">Email</div>
                                             <div class="col-lg-9 col-md-8">${sessionScope.user.getEmail()}</div>
                                         </div>
-                                        ${requestScope.noti}
+                                            <div style="color: green;">${requestScope.noti}</div>
                                     </div>
                                     <!-- Profile Edit Form -->
                                     <c:set var="profileType" value="${requestScope.profileType}"></c:set>
@@ -410,14 +410,14 @@
                                                         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name: </label>
                                                         <div class="col-md-8 col-lg-9">
                                                             <input name="txtFullName" type="text" class="form-control" id="fullName" value="${sessionScope.user.getFullName()}">
-                                                            ${requestScope.nameError}
+                                                            <div style="color: red;">${requestScope.nameError}</div>
                                                         </div> 
                                                     </div> 
                                                     <div class="row mb-3">
                                                         <label for="txtcid" class="col-md-4 col-lg-3 col-form-label ">CID</label>
                                                         <div class="col-md-8 col-lg-9">
                                                             <input name="txtcid" type="text" class="form-control" id="txtcid" value="${requestScope.viewProfile.getCID()}">
-                                                            ${requestScope.CIDError}
+                                                            <div style="color: red;">${requestScope.CIDError}</div>
                                                         </div>
                                                     </div>
 
@@ -425,7 +425,7 @@
                                                         <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                                                         <div class="col-md-8 col-lg-9">
                                                             <input name="txtAddress" type="text" class="form-control" id="Address" value="${requestScope.address}">
-                                                            ${requestScope.addressError}
+                                                             <div style="color: red;">${requestScope.addressError}</div>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
@@ -462,13 +462,13 @@
                                                 <label for="password" class="col-md-4 col-lg-3 col-form-label">New password</label>
                                                 <div class="col-md-8 col-lg-9">
                                                     <input type="password" name="newPasstxt" class="form-control" required>
-                                                    ${err.passwordErr}
+                                                    <div style="color: red;">${err.passwordErr}</div>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label for="password" class="col-md-4 col-lg-3 col-form-label">Confirm new password</label>
                                                 <div class="col-md-8 col-lg-9">
-                                                    ${err.confirmErr}
+                                                    <div style="color: red;">${err.confirmErr}</div>
                                                     <input type="password" name="confirmPasstxt" class="form-control" id="renewPassword">
                                                 </div><br></br>
                                                 <div class="text-center">

@@ -367,9 +367,9 @@
                                 <c:if test="${counter.count%6 == 4}"><img src="assets/img/card4.jpg" class="card-img-top" alt="..."></c:if>
                                 <c:if test="${counter.count%6 == 5}"><img src="assets/img/card5.jpg" class="card-img-top" alt="..."></c:if>
                                     <div class="card-body">
-                                        <h5 class="card-title">Contract's ID: ${contract.getCoID()}</h5>                                    
+                                        <h5 class="card-title">${contract.getName()}</h5>                                    
                                     <p class="card-text"><b>BETWEEN:</b> ${contract.getUName()} and ${contract.getOName()} </p>
-                                    <p class="card-text"><b>START DATE:</b> ${contract.getCreateDate()}       <b>END DATE:</b> ${contract.getEndDate()}  </p>
+                                    <p class="card-text"><b>EXPIRED DATE:</b> ${contract.getEndDate()}  </p>
                                     <p class="card-text"><b>Rental fee:</b> $${contract.getRentalFee()}/month</p>
                                     <input class="btn btn-primary" type="button" onclick="location.href = 'MainController?action=ViewContract&id=${contract.getCoID()}';" value="View contract detail" />
                                 </div>

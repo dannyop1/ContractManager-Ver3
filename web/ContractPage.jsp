@@ -301,11 +301,22 @@
                                 <i class="bi bi-circle"></i><span>View all contract</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="bi bi-circle"></i><span>Pending contract</span>
-                            </a>
-                        </li>
+                        <c:if test="${sessionScope.userType == 'U'}">
+                            <li>
+                                <a href="#">
+                                    <i class="bi bi-circle"></i><span>Pending contract</span>
+                                </a>
+                            </li>  
+                        </c:if>
+
+                        <c:if test="${sessionScope.userType == 'O'}">
+                            <li>
+                                <a href="CreateContract.jsp">
+                                    <i class="bi bi-circle"></i><span>Create Contract</span>
+                                </a>
+                            </li>
+                        </c:if>
+                     
                     </ul>
                 </li>
                 <!-- End Profile Page Nav -->
