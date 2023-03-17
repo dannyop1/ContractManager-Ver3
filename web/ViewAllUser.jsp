@@ -380,8 +380,9 @@
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Phone Number</th>
-                                                <th scope="col">LIVE CONTRACT</th>
-                                                <th scope="col">STATUS</th>
+                                                <th scope="col">Live Contract</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Action</th>
                                             </tr>
                                         </thead>
                                                 <tbody>
@@ -402,7 +403,8 @@
                                                     <td>${user.getPhoneNumber()}</td>
                                                     <td>${requestScope.countContract[count.index]}</td>
                                                     <td>${user.getStatus()}</td>
-                                                   
+                                                    
+                                                    <td><input class="btn btn-danger" type="submit" name="action" value="BAN"/></td>
                                                     </form>
                                                 </tr>
                                             </tbody>
