@@ -332,12 +332,13 @@
             <!------------------------------------------------------ Start Main ---------------------------------------------------->
             <c:set var="user" value="${sessionScope.user}"></c:set>
             <c:set var="userType" value="${sessionScope.userType}"></c:set>
-            <section class="section dashboard">
-                <div class="row">
-                    <table>
-                        <form action="MainController" method="POST">
-                            <tr>
-                                <td><input type="text" class="form-control" id="floatingInput" placeholder="Search by name" name="keyWord" value="${param.keyWord}"/></td>
+                <section class="section dashboard">
+                    <div class="row">
+                        <div class="col-lg-12">
+                        <table>
+                            <form action="MainController" method="POST">
+                                <tr>
+                                    <td><input type="text" class="form-control" id="floatingInput" placeholder="Search by name" name="keyWord" value="${param.keyWord}"/></td>
                                 <td> 
                                     <select class="form-select" type="hidden" name="role">
                                         <option  value="C">Customer</option>
@@ -352,18 +353,64 @@
                             </tr>
                             <br/>
                         </form>
-                    </table>
-                    <table>
-                        <form action="MainController" method="POST">
-                            <c:forEach var="user" varStatus="count" items="${requestScope.list}">
-                                ${user.getFullName()}<br/>
-                                <c:if test="${viewUserType != 'A'}">${user.getDateOfBirth()}</c:if><br/>
-                                <c:if test="${(viewUserType == 'R') || (viewUserType == 'O')}">${requestScope.countContract[count.index]}</c:if>
-                                <br/>
-                                
-                            </c:forEach>
-                        </form>
-                    </table>            
+                    </table></div><br></br><br></br>
+                    <form action="MainController" method="POST">
+
+                        <div class="col-lg-12">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <c:if test="${(viewUserType == 'O')}">
+                                    <h5 class="card-title">OWNER LIST ON SEVER</h5>
+                                    </c:if>
+                                    <c:if test="${(viewUserType == 'C')}">
+                                    <h5 class="card-title">CUSTOMER LIST ON SEVER</h5>
+                                    </c:if>
+                                    <c:if test="${(viewUserType == 'R')}">
+                                    <h5 class="card-title">RESIDENT LIST ON SEVER</h5>
+                                    </c:if>
+                                    <c:if test="${(viewUserType == 'A')}">
+                                    <h5 class="card-title">ADMIN LIST ON SEVER</h5>
+                                    </c:if>
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Phone Number</th>
+                                                <th scope="col">LIVE CONTRACT</th>
+                                                <th scope="col">STATUS</th>
+                                            </tr>
+                                        </thead>
+                                                <tbody>
+                                                    <tr>
+                                        <c:forEach var="user" varStatus="count" items="${requestScope.list}">
+                                            
+
+                                                    <form>
+                                                    <c:if test="${(viewUserType == 'R') || (viewUserType == 'C')}">
+                                                        <td>${user.getUID()}</td>
+                                                    </c:if>
+                                                    <c:if test="${viewUserType == 'O'}">
+                                                        <td>${user.getOID()}</td>   
+                                                    </c:if>
+                                                        
+                                                    <td>${user.getFullName()}</td>
+                                                    <td>${user.getEmail()}</td>
+                                                    <td>${user.getPhoneNumber()}</td>
+                                                    <td>${requestScope.countContract[count.index]}</td>
+                                                    <td>${user.getStatus()}</td>
+                                                   
+                                                    </form>
+                                                </tr>
+                                            </tbody>
+                                        </c:forEach>
+                                    </table></div></div></div>
+
+                    </form>
+
                     <!-- End Table with stripped rows -->
 
                 </div>

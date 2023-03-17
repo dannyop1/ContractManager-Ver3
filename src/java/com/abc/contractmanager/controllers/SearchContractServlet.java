@@ -69,12 +69,14 @@ public class SearchContractServlet extends HttpServlet {
                         userID = ((OwnerDTO) session.getAttribute("user")).getOID();
                         break;
                 }
+                request.setAttribute("status", status);
                 listContract = ContractDAO.searchContract(name, from, to, userID, userType, status);
             }else{
                 listContract = ContractDAO.getContracts();
             }
 
             request.setAttribute("contractList", listContract);
+            
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
