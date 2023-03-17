@@ -54,7 +54,7 @@
         <header id="header" class="header fixed-top d-flex align-items-center">
 
             <div class="d-flex align-items-center justify-content-between">
-                <a href="AdminIndex.jsp" class="logo d-flex align-items-center">
+                <a href="MainController?action=getInfo" class="logo d-flex align-items-center">
                     <img src="assets/img/logo.png" alt="">
                     <span class="d-none d-lg-block">ContractM</span>
                 </a>
@@ -276,7 +276,7 @@
             <ul class="sidebar-nav" id="sidebar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link " href="AdminIndex.jsp">
+                    <a class="nav-link " href="MainController?action=getInfo">
                         <i class="bi bi-grid"></i>
                         <span>Dashboard</span>
                     </a>
