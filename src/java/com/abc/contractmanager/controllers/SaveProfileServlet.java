@@ -153,7 +153,7 @@ public class SaveProfileServlet extends HttpServlet {
                             user = AdminDAO.getAdminDetail(((AdminDTO)user).getAID());
                             break;
                         case ('B'):
-                            user = (OwnerDTO) request.getSession().getAttribute("user");
+                            user = request.getSession().getAttribute("user");
                             BoardManagerDAO.updateAdmin(CID, fullName, address, ((BoardManagerDTO) user).getBID());
                             user = BoardManagerDAO.getAccount(((BoardManagerDTO)user).getEmail());
                             break;

@@ -108,6 +108,14 @@
         <servlet-name>SearchContractForAdminServlet</servlet-name>
         <servlet-class>com.abc.contractmanager.controllers.SearchContractForAdminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetPendingContract</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.GetPendingContract</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubmitContractServlet</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.SubmitContractServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -215,6 +223,14 @@
     <servlet-mapping>
         <servlet-name>SearchContractForAdminServlet</servlet-name>
         <url-pattern>/SearchContractForAdminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPendingContract</servlet-name>
+        <url-pattern>/GetPendingContract</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitContractServlet</servlet-name>
+        <url-pattern>/SubmitContractServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

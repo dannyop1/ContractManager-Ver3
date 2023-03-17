@@ -353,6 +353,24 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
+    
+    public static int upRoleResident(int UID){
+        Connection cn = null;
+        int rs = 0;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "update [dbo].[User] set [Type]= 1 where UID = ?";
+                PreparedStatement pr = cn.prepareStatement(sql);
+                pr.setInt(1, UID);
+                rs = pr.executeUpdate();
+                cn.close();
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 
     public static void main(String[] args) {
         UserDTO user = getUserByUID(1);

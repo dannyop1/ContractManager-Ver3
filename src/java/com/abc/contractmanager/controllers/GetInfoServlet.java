@@ -5,9 +5,11 @@
  */
 package com.abc.contractmanager.controllers;
 
+import com.abc.contractmanager.dao.AdminDAO;
 import com.abc.contractmanager.dao.ContractDAO;
 import com.abc.contractmanager.dao.OwnerDAO;
 import com.abc.contractmanager.dao.UserDAO;
+import com.abc.contractmanager.dto.AdminDTO;
 import com.abc.contractmanager.dto.ContractDTO;
 import com.abc.contractmanager.dto.OwnerDTO;
 import com.abc.contractmanager.dto.UserDTO;
@@ -47,6 +49,8 @@ public class GetInfoServlet extends HttpServlet {
             ArrayList<ContractDTO> contractList = ContractDAO.getContracts();
             ArrayList<OwnerDTO> ownerList = OwnerDAO.getOwnerList();
             ArrayList<UserDTO> userList = UserDAO.getUserList();
+            ArrayList<AdminDTO> addminList = AdminDAO.getAdminList();
+            int adminAvailable = 0;
             int allUser = ownerList.size() + userList.size();
             
             for (ContractDTO contract : contractList) {
@@ -82,6 +86,11 @@ public class GetInfoServlet extends HttpServlet {
                     }
             }
             
+            for (AdminDTO admin : addminList) {
+                if (admin.getStatus() == 1)
+                    adminAvailable++;
+            }
+            
             request.setAttribute("ownerAvailable", ownerAvailable);
             request.setAttribute("ownerUnavailable", ownerUnavailable);
             request.setAttribute("customerAvailable", customerAvailable);
@@ -90,6 +99,7 @@ public class GetInfoServlet extends HttpServlet {
             request.setAttribute("residentUnavaiable", residentUnavaiable);
             request.setAttribute("contractAvaiable", contractAvaiable);
             request.setAttribute("contractUnavailable", contractUnavailable);
+            request.setAttribute("adminAvailable", adminAvailable);
             request.setAttribute("revenue", revenue);
 //            out.print(allUser + ":" + ownerAvailable + "+" + ownerUnavailable + ":" + customerAvailable + "+" + customerUnavaiable + ":" + residentAvailable + "+" + residentUnavaiable);
             char userType = ((String)session.getAttribute("userType")).charAt(0);
