@@ -348,26 +348,56 @@
                     <label  class="form-label">Search</label> 
                     <input type="hidden" name="action" value="SearchAllContract"/>
                     <input class="btn btn-primary" type="submit" value="Search Contract"/></div>
-            </form>
+            </form><br>
+            <div class="col-lg-12">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <c:set var="status" value="${requestScope.txtStatus}"/>
+                                    <c:if test="${(status == '1')}">
+                                    <h5 class="card-title">SIGNED CONTRACT LIST ON SEVER</h5>
+                                    </c:if>
+                                    <c:if test="${(status == '0')}">
+                                    <h5 class="card-title">NOT SIGNED CONTRACT LIST ON SEVER</h5>
+                                    </c:if>
+                                    <c:if test="${(status == '2')}">
+                                    <h5 class="card-title">EXPIRED CONTRACT LIST ON SEVER</h5>
+                                    </c:if>
+                                    <c:if test="${(status == '-1')}">
+                                    <h5 class="card-title">ALL CONTRACT LIST ON SEVER</h5>
+                                    </c:if>
+
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Contract name</th>
+                                                <th scope="col">CUSTOMER</th>
+                                                <th scope="col">OWNER</th>
+                                                <th scope="col">Rental fee</th>
+                                                <th scope="col">System fee</th>
+                                                <th scope="col">Contract Status</th>
+                                            </tr>
+                                        </thead>
+                                                <tbody>
+                                                    <tr>
+                                                       
+            
             <c:forEach var="contract" varStatus="counter" items="${requestScope.contractList}">
-
-                <div class="col-lg-4">
-
-                    <!-- Card with an image on top -->
-                    <div class="card">
-                        <div class="card-body">
-                            <p>${contract.getCoID()}</p>
-                            <h5 class="card-title">Contract's name: ${contract.getName()}</h5>                                    
-                            <p class="card-text"><b>BETWEEN:</b> ${contract.getUName()} and ${contract.getOName()} </p>
-                            <p class="card-text"><b>START DATE:</b> ${contract.getCreateDate()}       <b>END DATE:</b> ${contract.getEndDate()}  </p>
-                            <p class="card-text"><b>Rental fee:</b> $${contract.getRentalFee()}</p>
-                            <input class="btn btn-primary" type="button" onclick="location.href = 'MainController?action=ViewContract&id=${contract.getCoID()}';" value="View contract detail" />
-
-                        </div>
-                    </div>
-                </div>
-
-            </c:forEach>
+                                                    
+                                                    <td>${contract.getCoID()}</td>
+                                                    <td>${contract.getName()}</td>
+                                                    <td>${contract.getUName()}</td>
+                                                    <td>${contract.getOName()}</td>
+                                                    <td>${contract.getRentalFee()}</td>
+                                                    <td>${contract.getSystemFee()}</td>
+                                                    <td>${contract.getStatus()}</td>
+               
+                                                            </tbody>
+            </c:forEach></table></div></div></div>
+                                                     
+             
         </main>
     </body>
 </html>
