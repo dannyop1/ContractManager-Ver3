@@ -35,7 +35,7 @@ public class SubmitContractServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int CoID = Integer.parseInt(request.getParameter("txtCoID"));
+            int CoID = Integer.parseInt(request.getParameter("id"));
             ContractDAO.submitContract(CoID);
             UserDTO user = (UserDTO) request.getSession().getAttribute("user");
             if(user.getStatus() == 0) {
@@ -43,7 +43,7 @@ public class SubmitContractServlet extends HttpServlet {
                 request.getSession().setAttribute("user", UserDAO.getUserByUID(user.getUID()));
             }
             
-            response.sendRedirect("FindTwoContractServlet");
+            response.sendRedirect("FindTwoContractsServlet");
         }
     }
 

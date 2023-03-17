@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mical
  */
-public class GetPendingContract extends HttpServlet {
+public class GetPendingContractServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

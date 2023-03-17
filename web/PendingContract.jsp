@@ -17,9 +17,11 @@
         <c:set var="contractList" value="${requestScope.contractList}"/>
         <c:forEach var="contract" items="${contractList}">
             <form action="MainController">
-                <p>${contract.getCoID()} ---- <input type="submit" value="Submit Contract"/></p>
-                <input type="hidden" name="txtCoID" value="${contract.getCoID()}"
-            </form>
+                <p>${contract.getCoID()} ---- </p>
+                <input type="text" name="id" value="${contract.getCoID()}">
+                <input type="submit" name="action" value="Submit Contract">
+                       
+             </form>
         </c:forEach>
     </body>
 </html>

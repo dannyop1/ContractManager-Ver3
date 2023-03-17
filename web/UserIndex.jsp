@@ -300,7 +300,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="GetPendingContractServlet">
                                 <i class="bi bi-circle"></i><span>Pending contract</span>
                             </a>
                         </li>
