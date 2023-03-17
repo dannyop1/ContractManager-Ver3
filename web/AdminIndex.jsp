@@ -386,7 +386,7 @@
                                     </div><!-- End Revenue Card -->
 
                                     <!-- Customers Card -->
-                                     <div class="col-xxl-6 col-md-6">
+                                    <div class="col-xxl-6 col-md-6">
                                         <div class="card info-card revenue-card">
 
 
@@ -408,7 +408,7 @@
 
                                         </div>
                                     </div>
-                                                         <div class="col-xxl-3 col-xl-12">
+                                    <div class="col-xxl-3 col-xl-12">
 
                                         <div class="card info-card customers-card">
 
@@ -422,7 +422,7 @@
                                                         <i class="bi bi-person-check"></i>
                                                     </div>
                                                     <div class="ps-3">
-                                                        <h6>${requestScope.customerAvailable}</h6>
+                                                        <h6>${requestScope.customerAvailable + requestScope.residentAvailable + requestScope.ownerAvailable} </h6>
 
 
                                                     </div>
@@ -432,7 +432,7 @@
                                         </div>
 
                                     </div>
-                                                         <div class="col-xxl-3 col-xl-12">
+                                    <div class="col-xxl-3 col-xl-12">
 
                                         <div class="card info-card customers-card">
 
@@ -446,7 +446,7 @@
                                                         <i class="bi bi-person-x"></i>
                                                     </div>
                                                     <div class="ps-3">
-                                                        <h6>${requestScope.customerAvailable}</h6>
+                                                        <h6>${requestScope.ownerUnavailable + requestScope.customerUnavailable + requestScope.residentUnavaiable}</h6>
 
 
                                                     </div>
@@ -456,47 +456,23 @@
                                         </div>
 
                                     </div>
-                                                         <div class="col-xxl-3 col-xl-12">
 
-                                        <div class="card info-card customers-card">
-
-
-
-                                            <div class="card-body">
-                                                <h5 class="card-title">Active admin <span>| All time</span></h5>
-
-                                                <div class="d-flex align-items-center">
-                                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i class="bi bi-person-check"></i>
-                                                    </div>
-                                                    <div class="ps-3">
-                                                        <h6>${requestScope.customerAvailable}</h6>
-
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                                        
-                                                        <!-- End Customers Card -->
+                                    <!-- End Customers Card -->
 
 
 
 
 
-                        </div><!-- End Right side columns -->
+                                </div><!-- End Right side columns -->
 
-                        </div>
+                            </div>
                     </section>
 
             </main><!-- End #main -->
             <!-- End #main --------------------------------------------------------------------------------------------------------------->
 
 
-        
+
 
 
         </c:if>

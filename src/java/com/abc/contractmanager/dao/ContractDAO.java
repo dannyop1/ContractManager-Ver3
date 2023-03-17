@@ -388,7 +388,7 @@ public class ContractDAO {
         }
         return result;
     }
-  
+
     public static ArrayList<ContractDTO> searchContract2(String name, Date from, Date to, int Status) {
         if (name == null) {
             name = "";
@@ -469,6 +469,10 @@ public class ContractDAO {
         return result;
     }
 
+    public static void main(String[] args) {
+        System.out.println(getPendingContract(1).size());
+    }
+
     public static void createContract(int RoID, int UID, int OID, int rentalFee, int systemFee, Date from, Date to, String name, String description) {
         Connection cn = null;
         try {
@@ -482,7 +486,7 @@ public class ContractDAO {
                 pst.setInt(2, UID);
                 pst.setInt(3, OID);
                 pst.executeUpdate();
-                int CoID = getContract(RoID, OID, OID);
+                int CoID = getContract(RoID, UID, OID);
                 String sql1 = "INSERT [dbo].[ContractInformation] ([CoID], [RentalFee], [SystemFee], [createDate], [endDate], [name], [description]) "
                         + "VALUES (?,?,?,?,?,?,?)";
                 PreparedStatement pst1 = cn.prepareStatement(sql1);
@@ -494,6 +498,7 @@ public class ContractDAO {
                 pst1.setString(6, name);
                 pst1.setString(7, description);
                 pst1.executeUpdate();
+                cn.close();
             }
         } catch (Exception e) {
             e.getCause();
@@ -524,6 +529,37 @@ public class ContractDAO {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    public static ArrayList<ContractDTO> getPendingContract(int UID) {
+        Connection cn = null;
+        ArrayList<ContractDTO> result = new ArrayList<>();
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "select [dbo].[Contract].[CoID], [dbo].[Contract].[RoID], [dbo].[Contract].[UID], [dbo].[User].[Fullname],\n"
+                        + "[dbo].[Contract].[OID], [dbo].[Owner].[Fullname], [RentalFee], [SystemFee], [CreateDate],\n"
+                        + "[EndDate], [Name], [Description], [dbo].[Contract].[Status]\n"
+                        + "from [dbo].[Contract]\n"
+                        + "left join [dbo].[ContractInformation] on Contract.[CoID] = [dbo].[ContractInformation].[CoID] \n"
+                        + "left join [dbo].[User] on [dbo].[Contract].UID = [dbo].[User].UID\n"
+                        + "left join [dbo].[Owner] on [dbo].[Contract].[OID] = [dbo].[Owner].[OID] \n"
+                        + "where [dbo].[Contract].[UID] = ? and [dbo].[Contract].[Status] = 0";
+                PreparedStatement pr = cn.prepareStatement(sql);
+                pr.setInt(1, UID);
+                ResultSet rs = pr.executeQuery();
+                if (result != null) {
+                    while (rs.next()) {
+                        ContractDTO nw = new ContractDTO(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getDate(9), rs.getDate(10), rs.getString(11), rs.getString(12), rs.getInt(13));
+                        result.add(nw);
+                    }
+                }
+                cn.close();
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public static int countAvailableContracts() {
@@ -586,9 +622,23 @@ public class ContractDAO {
         }
         return result;
     }
-
-    public static void main(String[] args) {
-        System.out.println(getContracts().size());
+    
+    public static int submitContract(int CoID){
+        Connection cn = null;
+        int rs = 0;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "update [dbo].[Contract] set Status = 1 where CoID = ?";
+                PreparedStatement pr = cn.prepareStatement(sql);
+                pr.setInt(1, CoID);
+                rs = pr.executeUpdate();
+                cn.close();
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
 }

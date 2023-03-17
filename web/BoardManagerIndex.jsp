@@ -386,7 +386,7 @@
                                     </div><!-- End Revenue Card -->
 
                                     <!-- Customers Card -->
-                                     <div class="col-xxl-6 col-md-6">
+                                    <div class="col-xxl-6 col-md-6">
                                         <div class="card info-card revenue-card">
 
 
@@ -408,7 +408,7 @@
 
                                         </div>
                                     </div>
-                                                         <div class="col-xxl-3 col-xl-12">
+                                    <div class="col-xxl-3 col-xl-12">
 
                                         <div class="card info-card customers-card">
 
@@ -422,7 +422,7 @@
                                                         <i class="bi bi-person-check"></i>
                                                     </div>
                                                     <div class="ps-3">
-                                                        <h6>${requestScope.customerAvailable}</h6>
+                                                        <h6>${requestScope.customerAvailable + requestScope.residentAvailable + requestScope.ownerAvailable} </h6>
 
 
                                                     </div>
@@ -432,7 +432,7 @@
                                         </div>
 
                                     </div>
-                                                         <div class="col-xxl-3 col-xl-12">
+                                    <div class="col-xxl-3 col-xl-12">
 
                                         <div class="card info-card customers-card">
 
@@ -446,7 +446,7 @@
                                                         <i class="bi bi-person-x"></i>
                                                     </div>
                                                     <div class="ps-3">
-                                                        <h6>${requestScope.customerAvailable}</h6>
+                                                        <h6>${requestScope.ownerUnavailable + requestScope.customerUnavailable + requestScope.residentUnavaiable}</h6>
 
 
                                                     </div>
@@ -470,7 +470,7 @@
                                                         <i class="bi bi-person-check"></i>
                                                     </div>
                                                     <div class="ps-3">
-                                                        <h6>${requestScope.customerAvailable}</h6>
+                                                        <h6>${requestScope.adminAvailable}</h6>
 
 
                                                     </div>
