@@ -388,8 +388,8 @@ public class ContractDAO {
         }
         return result;
     }
-
-    public static ArrayList<ContractDTO> searchContract2(String name, Date from, Date to, char userType, int Status) {
+  
+    public static ArrayList<ContractDTO> searchContract2(String name, Date from, Date to, int Status) {
         if (name == null) {
             name = "";
         }
@@ -406,17 +406,7 @@ public class ContractDAO {
                         + "left join [dbo].[ContractInformation] on Contract.[CoID] = [dbo].[ContractInformation].[CoID] \n"
                         + "left join [dbo].[User] on [dbo].[Contract].UID = [dbo].[User].UID\n"
                         + "left join [dbo].[Owner] on [dbo].[Contract].[OID] = [dbo].[Owner].[OID] ";
-                switch (userType) {
-                    case 'O':
-                        sql = sql + "where "
-                                + "([dbo].[User].[Fullname] like ?";
-                        break;
-                    default:
-                        sql = sql + "where "
-                                + "([dbo].[Owner].[Fullname] like ?";
-                        break;
-                }
-                sql = sql + " or [dbo].[ContractInformation].[Name] like ?)";
+                sql = sql + "where ([dbo].[User].[Fullname] like ? or [dbo].[Owner].[Fullname] like ? )";
                 if (from != null) {
                     if (to != null) {
                         sql = sql + " and ([createDate]>=? and [createDate]<=?)";
@@ -436,8 +426,6 @@ public class ContractDAO {
                 if (Status != -1) {
                     sql = sql + " and [Contract].[status] = ?";
                 }
-                if(userType == 'C') sql = sql + " and [User].[Type]=0";
-                else if(userType == 'R') sql = sql + " and [User].[Type]=1";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, "%" + name + "%");
                 pst.setString(2, "%" + name + "%");

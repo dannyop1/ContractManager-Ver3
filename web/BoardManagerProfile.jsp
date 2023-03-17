@@ -388,12 +388,10 @@
                                         ${requestScope.noti}
                                     </div>
                                     <!-- Profile Edit Form -->
-                                    <c:set var="profileType" value="${requestScope.profileType}"></c:set>
                                     <c:set var="edit" value="${requestScope.edit}"></c:set>
                                         <div class="tab-pane fade profile-edit pt-3 text-dark" id="profile-edit">
                                             <table>
                                             <c:if test="${edit == 'true'}">
-
                                                 <form action="MainController" >
                                                     <div class="row mb-3">
                                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>

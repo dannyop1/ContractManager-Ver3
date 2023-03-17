@@ -42,7 +42,6 @@ public class SearchContractForAdminServlet extends HttpServlet {
             HttpSession session = request.getSession();
             String url = request.getParameter("durl");
             ArrayList<ContractDTO> listContract = new ArrayList<>();
-            char userType = (request.getParameter("txtUserType")).charAt(0);
             int status = Integer.parseInt(request.getParameter("txtStatus"));
             String name = request.getParameter("txtSearchName");
             request.setAttribute("txtSearchName", name);
@@ -59,7 +58,7 @@ public class SearchContractForAdminServlet extends HttpServlet {
                 request.setAttribute("txtToDate", to);
             }
             request.setAttribute("txtStatus", status);
-            listContract = ContractDAO.searchContract2(name, from, to, userType, status);
+            listContract = ContractDAO.searchContract2(name, from, to, status);
             request.setAttribute("contractList", listContract);
             request.getRequestDispatcher(url).forward(request, response);
         }
