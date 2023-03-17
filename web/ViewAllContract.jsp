@@ -47,7 +47,7 @@
         <header id="header" class="header fixed-top d-flex align-items-center">
 
             <div class="d-flex align-items-center justify-content-between">
-                <a href="AdminIndex.jsp" class="logo d-flex align-items-center">
+                <a href="MainController?action=getInfo" class="logo d-flex align-items-center">
                     <img src="assets/img/logo.png" alt="">
                     <span class="d-none d-lg-block">ContractM</span>
                 </a>
@@ -269,7 +269,7 @@
             <ul class="sidebar-nav" id="sidebar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link " href="AdminIndex.jsp">
+                    <a class="nav-link " href="MainController?action=getInfo">
                         <i class="bi bi-grid"></i>
                         <span>Dashboard</span>
                     </a>
@@ -318,9 +318,9 @@
                 <h1>Dashboard</h1>
                 <nav>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="MainController?action=Find2contracts">Home</a></li>
-                        <li class="breadcrumb-item">Users</li>
-                        <li class="breadcrumb-item active">Profile</li>
+                        <li class="breadcrumb-item"><a href="MainController?action=getInfo">Home</a></li>
+                        <li class="breadcrumb-item">All contract on sever</li>
+                       
 
                     </ol>
                 </nav>
