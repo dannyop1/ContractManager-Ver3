@@ -294,24 +294,40 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="MainController?action=View+Profile">
-                        <i class="bi bi-person"></i>
+                        <i class="bi bi-person-badge"></i>
                         <span>Profile</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="ViewAllUser.jsp">
-                        <i class="bi bi-layout-text-window-reverse"></i><span>All user on sever</span>
+                        <i class="bi bi-person-lines-fill"></i><span>All user on sever</span>
                     </a>
 
                 </li>
+                <c:if test="${sessionScope.userType == 'B'}">
+                    <li class="nav-item">
+                    <a class="nav-link collapsed" href="AddNewAdmin.jsp">
+                        <i class="bi bi-person-add"></i>
+                        <span>Add new admin</span>
+                    </a>
+                </li>  
+                </c:if>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="MainController?action=Search+Contract&durl=ViewAllContract.jsp?userType=A">
-                        <i class="bi bi-person"></i>
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="ViewAllContract.jsp">
+                        <i class="bi bi-layout-text-window-reverse"></i>
                         <span>All contract on server</span>
                     </a>
                 </li>
+                 <c:if test="${sessionScope.userType == 'B'}">
+                    <li class="nav-item">
+                    <a class="nav-link collapsed" href="AddRoom.jsp">
+                        <i class="bi bi-house-add"></i>
+                        <span>Add room</span>
+                    </a>
+                </li>  
+                </c:if>
                 <!-- End Profile Page Nav -->
 
 
