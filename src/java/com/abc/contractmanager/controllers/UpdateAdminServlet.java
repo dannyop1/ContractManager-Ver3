@@ -33,16 +33,14 @@ public class UpdateAdminServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String id = request.getParameter("id");
-            String email = request.getParameter("email");
+            int id = Integer.parseInt(request.getParameter("id"));
             String cid = request.getParameter("cid");
-            String password = request.getParameter("password");
             String name = request.getParameter("name");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             int status = Integer.parseInt(request.getParameter("status"));
             //out.println(id+email+cid+password+name+phone+avatar+address+" "+status);
-            int result = AdminDAO.updateAdmin(id, email, cid, password, name, phone, address, status);
+            int result = AdminDAO.updateAdmin(cid, name, address, phone, id);
             if (result > 0) {
                 request.setAttribute("noti","Update successfully");
                 request.getRequestDispatcher("ViewAdminServlet?id="+id).forward(request, response);

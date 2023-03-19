@@ -5,21 +5,36 @@
  */
 package com.abc.contractmanager.controllers;
 
+import com.abc.contractmanager.dao.AdminDAO;
+import com.abc.contractmanager.dao.BoardManagerDAO;
 import com.abc.contractmanager.dao.OwnerDAO;
 import com.abc.contractmanager.dao.UserDAO;
-import com.abc.contractmanager.utils.Utilities;
+import com.abc.contractmanager.dto.AdminDTO;
+import com.abc.contractmanager.dto.BoardManagerDTO;
+import com.abc.contractmanager.dto.OwnerDTO;
+import com.abc.contractmanager.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author mical
  */
-public class UpdateUserServlet extends HttpServlet {
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 1, //1MB
+        maxFileSize = 1024 * 1024 * 10, //10MB
+        maxRequestSize = 1024 * 1024 * 100 //100MB
+)
+public class SetAvatarServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,37 +49,47 @@ public class UpdateUserServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            final String PATH = "D:\\Study\\SWP302\\contractmanager\\web\\images\\";
             /* TODO output your page here. You may use following sample code. */
-            String id = request.getParameter("id");
-            String role = request.getParameter("role");
-            String email = request.getParameter("email");
-            String cid = request.getParameter("cid");
-            String password = request.getParameter("password");
-            String dob = request.getParameter("date");
-            String name = request.getParameter("name");
-            String address = request.getParameter("address");
-            String avatar = request.getParameter("avatar");
-            int status = Integer.parseInt(request.getParameter("status"));
-            int result = 0;
-            switch (role) {
-                case "U":
-                    result = UserDAO.updateProfile(cid, Utilities.convert(dob), name, address, result);
-                    if (result > 0) {
-                        request.setAttribute("noti", "Update successfully");
-                    } else {
-                        request.setAttribute("noti", "Can not update");
-                    }
+            Part filePart = request.getPart("avatar");
+            String fileName = filePart.getSubmittedFileName();
+            String[] sp = fileName.split("\\.");
+            String ext = sp[(sp.length) - 1];
+            for (Part part : request.getParts()) {
+                part.write("D:\\Study\\SWP302\\contractmanager\\web\\images\\" + fileName);
+            }
+            char userType = ((String) request.getSession().getAttribute("userType")).charAt(0);
+            Path source = Paths.get(PATH + fileName);
+            String fileSName = String.valueOf(System.currentTimeMillis()) + "." + ext;
+            Files.move(source, source.resolveSibling(fileName));
+            String url = "";
+            int id = 0;
+            switch (userType) {
+                case 'O':
+                    url = "OwnerProfile.jsp";
+                    id = ((OwnerDTO)request.getSession().getAttribute("user")).getOID();
+                    OwnerDAO.setAvatar(PATH, id);
                     break;
-                case "O":
-                    result = OwnerDAO.updateOwner(Integer.parseInt(id), cid, Utilities.convert(dob), name, address);
-                    if (result > 0) {
-                        request.setAttribute("noti", "Update successfully");
-                    } else {
-                        request.setAttribute("noti", "Can not update");
-                    }
+                case 'U':
+                    url = "UserProfile.jsp";
+                    id = ((UserDTO)request.getSession().getAttribute("user")).getUID();
+                    UserDAO.setAvatar(PATH, id);
+                    break;
+                case 'A':
+                    url = "AdminProfile.jsp";
+                    id = ((AdminDTO)request.getSession().getAttribute("user")).getAID();
+                    AdminDAO.setAvatar(PATH, id);
+                    break;
+                case 'B':
+                    url = "BoardManager.jsp";
+                    id = ((BoardManagerDTO)request.getSession().getAttribute("user")).getBID();
+                    BoardManagerDAO.setAvatar(PATH, id);
                     break;
             }
-            request.getRequestDispatcher("ViewUser?id=" + id + "&role=" + role).forward(request, response);
+
+            request.setAttribute("noti", "Upload avatar success!");
+            
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

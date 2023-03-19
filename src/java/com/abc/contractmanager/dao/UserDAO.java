@@ -354,6 +354,20 @@ public class UserDAO {
         }
     }
     
+    public static void setAvatar(String avatar, int uid){
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "update [dbo].[User] set [Avatar] =? where [UID]=?";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setString(1, avatar);
+            pr.setInt(2, uid);
+            pr.executeUpdate();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static int upRoleResident(int UID){
         Connection cn = null;
         int rs = 0;

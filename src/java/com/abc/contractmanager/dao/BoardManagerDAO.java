@@ -113,4 +113,17 @@ public class BoardManagerDAO {
         }
         return result;
     }
+    public static void setAvatar(String avatar, int bid){
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "update [dbo].[BoardManager] set [Avatar] =? where [UID]=?";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setString(1, avatar);
+            pr.setInt(2, bid);
+            pr.executeUpdate();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

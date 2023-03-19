@@ -110,12 +110,12 @@ public class MainController extends HttpServlet {
                 case "Forgot password":
                     url = "ForgotPasswordServlet";
                     break;
-                 case "Search Contract":
+                case "Search Contract":
                     url = "SearchContractServlet";
                     break;
                 case "Create Contract":
                     url = "CreateContractServlet";
-                    break;   
+                    break;
                 case "Sign this Contract":
                     url = "SignContractServlet";
                     break;
@@ -127,6 +127,9 @@ public class MainController extends HttpServlet {
                     break;
                 case "Submit Contract":
                     url = "SubmitContractServlet";
+                    break;
+                case "Set Avatar":
+                    url = "SetAvatarServlet";
                     break;
             }
             request.getRequestDispatcher(url).forward(request, response);

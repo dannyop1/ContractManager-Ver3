@@ -406,7 +406,10 @@
                                         </div>
                                         <div style="color: green;">${requestScope.noti}</div>
 
-
+                                        <form method="post" action="SetAvatarServlet" enctype="multipart/form-data">
+                                            <input type="file" name="avatar">
+                                            <input type="submit" value="Upload">
+                                        </form>
 
 
 
@@ -436,7 +439,7 @@
                                                         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name: </label>
                                                         <div class="col-md-8 col-lg-9">
                                                             <input name="txtFullName" type="text" class="form-control" id="fullName" value="${sessionScope.user.getFullName()}">
-                                                           <div style="color: red;">${requestScope.nameError}</div>
+                                                            <div style="color: red;">${requestScope.nameError}</div>
                                                         </div> 
                                                     </div>
                                                     <c:if test="${(profileType == 'C')}">   
@@ -444,7 +447,7 @@
                                                             <label for="txtcid" class="col-md-4 col-lg-3 col-form-label ">CID</label>
                                                             <div class="col-md-8 col-lg-9">
                                                                 <input name="txtcid" type="text" class="form-control" id="txtcid" value="${requestScope.viewProfile.getCID()}">
-                                                               <div style="color: red;">${requestScope.CIDError}</div>
+                                                                <div style="color: red;">${requestScope.CIDError}</div>
                                                             </div>
                                                         </div>
                                                     </c:if>
@@ -453,7 +456,7 @@
                                                             <label for="txtcid" class="col-md-4 col-lg-3 col-form-label">CID</label>
                                                             <div class="col-md-8 col-lg-9">
                                                                 <input name="txtcid" type="text" class="form-control" id="txtcid" value="${requestScope.viewProfile.getOCID()}">
-                                                               <div style="color: red;">${requestScope.CIDError}</div>
+                                                                <div style="color: red;">${requestScope.CIDError}</div>
                                                             </div>
                                                         </div>
                                                     </c:if>
@@ -462,7 +465,7 @@
                                                             <label for="txtcid" class="col-md-4 col-lg-3 col-form-label">CID</label>
                                                             <div class="col-md-8 col-lg-9">
                                                                 <input name="txtcid" type="text" class="form-control" id="txtcid" value="${requestScope.viewProfile.getRCID()}">
-                                                              <div style="color: red;">${requestScope.CIDError}</div>
+                                                                <div style="color: red;">${requestScope.CIDError}</div>
                                                             </div>
                                                         </div>
                                                     </c:if>
@@ -480,7 +483,7 @@
                                                         <label for="txtDate" class="col-md-4 col-lg-3 col-form-label">DOB</label>
                                                         <div class="col-md-8 col-lg-9">
                                                             <input name="txtDate" type="date" class="form-control" id="company" value="${requestScope.txtDate}">
-                                                           <div style="color: red;">${requestScope.DoBError}</div>
+                                                            <div style="color: red;">${requestScope.DoBError}</div>
                                                         </div>
                                                     </div>
 
@@ -488,7 +491,7 @@
                                                         <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                                                         <div class="col-md-8 col-lg-9">
                                                             <input name="txtAddress" type="text" class="form-control" id="Address" value="${requestScope.address}">
-                                                          <div style="color: red;">${requestScope.addressError}</div>
+                                                            <div style="color: red;">${requestScope.addressError}</div>
                                                         </div>
                                                     </div>
 
@@ -532,13 +535,13 @@
                                                 <label for="password" class="col-md-4 col-lg-3 col-form-label">New password</label>
                                                 <div class="col-md-8 col-lg-9">
                                                     <input type="password" name="newPasstxt" class="form-control" required>
-                                                   <div style="color: red;">${err.passwordErr}</div>
+                                                    <div style="color: red;">${err.passwordErr}</div>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label for="password" class="col-md-4 col-lg-3 col-form-label">Confirm new password</label>
                                                 <div class="col-md-8 col-lg-9">
-                                                   <div style="color: red;">${err.confirmErr}</div>
+                                                    <div style="color: red;">${err.confirmErr}</div>
                                                     <input type="password" name="confirmPasstxt" class="form-control" id="renewPassword">
                                                 </div><br></br>
                                                 <div class="text-center">

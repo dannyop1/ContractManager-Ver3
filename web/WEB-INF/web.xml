@@ -116,6 +116,10 @@
         <servlet-name>SubmitContractServlet</servlet-name>
         <servlet-class>com.abc.contractmanager.controllers.SubmitContractServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SetAvatarServlet</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.SetAvatarServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>SubmitContractServlet</servlet-name>
         <url-pattern>/SubmitContractServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetAvatarServlet</servlet-name>
+        <url-pattern>/SetAvatarServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

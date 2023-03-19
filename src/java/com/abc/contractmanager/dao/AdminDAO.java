@@ -161,6 +161,27 @@ public class AdminDAO {
         return result;
     }
 
+    public static int updateAdmin(String cid, String name, String address, String phone, int AID) {
+        int result = 0;
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "UPDATE [dbo].[Admin]\n"
+                    + "SET [CID] = ?, [Fullname] = ?, [Address]= ?, [Phone] = ?\n"
+                    + "WHERE [AID]= ?";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setString(1, cid);
+            pr.setString(2, name);
+            pr.setString(3, address);
+            pr.setString(4, phone);
+            pr.setInt(5, AID);
+            result = pr.executeUpdate();
+            cn.close();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
     public static int insertAdmin(String email, String password, String name, String cid) {
         int result = 0;
         try {
@@ -201,5 +222,18 @@ public class AdminDAO {
      
     public static void main(String[] args) {
         System.out.println(getAdminListByName("N").size());
+    }
+    public static void setAvatar(String avatar, int aid){
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "update [dbo].[Admin] set [Avatar] =? where [UID]=?";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setString(1, avatar);
+            pr.setInt(2, aid);
+            pr.executeUpdate();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

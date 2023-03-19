@@ -171,20 +171,19 @@ public class OwnerDAO {
         return list;
     }
     
-    public static int updateOwner(int OID, String CID, Date dob, String name, String phone, String address) {
+    public static int updateOwner(int OID, String CID, Date dob, String name, String address) {
         int result = 0;
         try {
             Connection cn = DBUtils.getConnection();
             String sql = "UPDATE [dbo].[Ơner] \n"
-                    + "set [Fullname] = ?, [DateOfBirth] = ?, [Address] = ?, [CID] = ?, [Phone] = ?\n"
+                    + "set [Fullname] = ?, [DateOfBirth] = ?, [Address] = ?, [CID] = ?\n"
                     + "where OID = ?";
             PreparedStatement pr = cn.prepareStatement(sql);
             pr.setString(1, name);
             pr.setDate(2, dob);
             pr.setString(3, address);
             pr.setString(4, CID);
-            pr.setString(5, phone);
-            pr.setInt(6, OID);
+            pr.setInt(5, OID);
             result = pr.executeUpdate();
 
             cn.close();
@@ -213,5 +212,18 @@ public class OwnerDAO {
             e.printStackTrace();
         }
         return rs;
+    }
+    public static void setAvatar(String avatar, int oid){
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "update [dbo].[Owner] set [Avatar] =? where [UID]=?";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setString(1, avatar);
+            pr.setInt(2, oid);
+            pr.executeUpdate();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
