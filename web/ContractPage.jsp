@@ -284,9 +284,9 @@
 
                 <li class="nav-heading">Pages</li>
 
-                <li class="nav-item">
+                 <li class="nav-item">
                     <a class="nav-link collapsed" href="MainController?action=View+Profile">
-                        <i class="bi bi-person"></i>
+                        <i class="bi bi-person-badge"></i>
                         <span>Profile</span>
                     </a>
                 </li>

@@ -293,24 +293,41 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="MainController?action=View+Profile">
-                        <i class="bi bi-person"></i>
+                        <i class="bi bi-person-badge"></i>
                         <span>Profile</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="ViewAllUser.jsp">
-                        <i class="bi bi-layout-text-window-reverse"></i><span>All user on sever</span>
+                        <i class="bi bi-person-lines-fill"></i><span>All user on sever</span>
                     </a>
 
                 </li>
+                <c:if test="${sessionScope.userType == 'B'}">
+                    <li class="nav-item">
+                    <a class="nav-link collapsed" href="AddNewAdmin.jsp">
+                        <i class="bi bi-person-add"></i>
+                        <span>Add new admin</span>
+                    </a>
+                </li>  
+                </c:if>
 
-                <li class="nav-item">
+                 <li class="nav-item">
                     <a class="nav-link collapsed" href="ViewAllContract.jsp">
-                        <i class="bi bi-person"></i>
+                        <i class="bi bi-layout-text-window-reverse"></i>
                         <span>All contract on server</span>
                     </a>
                 </li>
+                 <c:if test="${sessionScope.userType == 'B'}">
+                    <li class="nav-item">
+                    <a class="nav-link collapsed" href="AddRoom.jsp">
+                        <i class="bi bi-house-add"></i>
+                        <span>Add room</span>
+                    </a>
+                </li>  
+                </c:if>
+
                 <!-- End Profile Page Nav -->
 
 
@@ -335,25 +352,25 @@
                 <section class="section dashboard">
                     <div class="row">
                         <div class="col-lg-12">
-                        <table>
-                            <form action="MainController" method="POST">
-                                <tr>
-                                    <td><input type="text" class="form-control" id="floatingInput" placeholder="Search by name" name="keyWord" value="${param.keyWord}"/></td>
-                                <td> 
-                                    <select class="form-select" type="hidden" name="role">
-                                        <option  value="C">Customer</option>
-                                        <option  value="R">Resident</option>
-                                        <option  value="O">Owner</option>
-                                        <c:if test="${userType == 'B'}">
-                                            <option  value="A">Admin</option>
-                                        </c:if>
-                                    </select>
-                                </td>
-                                <td><input class="btn btn-primary" type="submit" name="action" value="Search User"/></td>
-                            </tr>
-                            <br/>
-                        </form>
-                    </table></div><br></br><br></br>
+                            <table>
+                                <form action="MainController" method="POST">
+                                    <tr>
+                                        <td><input type="text" class="form-control" id="floatingInput" placeholder="Search by name" name="keyWord" value="${param.keyWord}"/></td>
+                                    <td> 
+                                        <select class="form-select" type="hidden" name="role">
+                                            <option  value="C">Customer</option>
+                                            <option  value="R">Resident</option>
+                                            <option  value="O">Owner</option>
+                                            <c:if test="${userType == 'B'}">
+                                                <option  value="A">Admin</option>
+                                            </c:if>
+                                        </select>
+                                    </td>
+                                    <td><input class="btn btn-primary" type="submit" name="action" value="Search User"/></td>
+                                </tr>
+                                <br/>
+                            </form>
+                        </table></div><br></br><br></br>
                     <form action="MainController" method="POST">
 
                         <div class="col-lg-12">
@@ -361,16 +378,16 @@
                             <div class="card">
                                 <div class="card-body">
                                     <c:if test="${(viewUserType == 'O')}">
-                                    <h5 class="card-title">OWNER LIST ON SEVER</h5>
+                                        <h5 class="card-title">OWNER LIST ON SEVER</h5>
                                     </c:if>
                                     <c:if test="${(viewUserType == 'C')}">
-                                    <h5 class="card-title">CUSTOMER LIST ON SEVER</h5>
+                                        <h5 class="card-title">CUSTOMER LIST ON SEVER</h5>
                                     </c:if>
                                     <c:if test="${(viewUserType == 'R')}">
-                                    <h5 class="card-title">RESIDENT LIST ON SEVER</h5>
+                                        <h5 class="card-title">RESIDENT LIST ON SEVER</h5>
                                     </c:if>
                                     <c:if test="${(viewUserType == 'A')}">
-                                    <h5 class="card-title">ADMIN LIST ON SEVER</h5>
+                                        <h5 class="card-title">ADMIN LIST ON SEVER</h5>
                                     </c:if>
 
                                     <table class="table">
@@ -385,28 +402,28 @@
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
-                                                <tbody>
-                                                    <tr>
-                                        <c:forEach var="user" varStatus="count" items="${requestScope.list}">
-                                            
+                                        <tbody>
+                                            <tr>
+                                                <c:forEach var="user" varStatus="count" items="${requestScope.list}">
 
-                                                    <form>
-                                                    <c:if test="${(viewUserType == 'R') || (viewUserType == 'C')}">
-                                                        <td>${user.getUID()}</td>
-                                                    </c:if>
-                                                    <c:if test="${viewUserType == 'O'}">
-                                                        <td>${user.getOID()}</td>   
-                                                    </c:if>
-                                                        
-                                                    <td>${user.getFullName()}</td>
-                                                    <td>${user.getEmail()}</td>
-                                                    <td>${user.getPhoneNumber()}</td>
-                                                    <td>${requestScope.countContract[count.index]}</td>
-                                                    <td>${user.getStatus()}</td>
-                                                    
-                                                    <td><input class="btn btn-danger" type="submit" name="action" value="BAN"/></td>
-                                                    </form>
-                                                </tr>
+
+                                            <form>
+                                                <c:if test="${(viewUserType == 'R') || (viewUserType == 'C')}">
+                                                    <td>${user.getUID()}</td>
+                                                </c:if>
+                                                <c:if test="${viewUserType == 'O'}">
+                                                    <td>${user.getOID()}</td>   
+                                                </c:if>
+
+                                                <td>${user.getFullName()}</td>
+                                                <td>${user.getEmail()}</td>
+                                                <td>${user.getPhoneNumber()}</td>
+                                                <td>${requestScope.countContract[count.index]}</td>
+                                                <td>${user.getStatus()}</td>
+
+                                                <td><input class="btn btn-danger" type="submit" name="action" value="BAN"/></td>
+                                            </form>
+                                            </tr>
                                             </tbody>
                                         </c:forEach>
                                     </table></div></div></div>
