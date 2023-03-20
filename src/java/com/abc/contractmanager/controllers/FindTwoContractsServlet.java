@@ -83,7 +83,8 @@ public class FindTwoContractsServlet extends HttpServlet {
             } else request.setAttribute("contractStats", -1); //contractStat = -1 : khong co
             ArrayList<String> img = new ArrayList<>();
             for (ContractDTO contract : listContract) {
-                img.add(RoomDAO.getRoomImg(contract.getRoID()));
+                int RoIDa = contract.getRoID();
+                img.add(RoomDAO.getRoomImg(RoIDa));
             }
             request.setAttribute("imgList", img);
             request.setAttribute("contractList", listContract);

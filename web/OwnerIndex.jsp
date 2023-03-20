@@ -216,7 +216,7 @@
 
                             <!-- Card with an image on top -->
                             <div class="card">
-                                <img src="room_images/${imgList.get(counter.index)}" class="card-img-top" alt="...">
+                                <img src="room_images/${imgList.get(counter.index)}" class="card-img-top" alt="..." style="width: 100%; height: 300px;">
                                 
                                     <div class="card-body">
                                         <h5 class="card-title"> ${contract.getName()}</h5>                                    
