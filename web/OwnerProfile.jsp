@@ -67,7 +67,7 @@
                     <li class="nav-item dropdown pe-3">
 
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                            <img src="images/${sessionScope.user.getAvatar()}" alt="Profile" class="rounded-circle">
                             <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.user.getFullName()}</span>
                         </a><!-- End Profile Iamge Icon -->
 
@@ -188,7 +188,7 @@
 
                         <div class="card">
                             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                                <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                                <img src="images/${sessionScope.user.getAvatar()}" alt="Profile" class="rounded-circle">
                                 <h2>${sessionScope.user.getFullName()}</h2>
                             </div>
                         <div class="d-flex flex-column align-items-center">     
@@ -219,7 +219,8 @@
                                     <form method="post" action="MainController">
                                         <label>
 
-                                            <input class="btn btn-danger btn-sm" type="submit" value="REMOVE AVATAR" name="action">
+                                            <input class="btn btn-danger btn-sm" type="submit" value="REMOVE AVATAR">
+                                            <input type="hidden" value="Delete Avatar" name="action"> 
 
                                         </label>
                                     </form> 

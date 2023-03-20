@@ -203,7 +203,7 @@
 
                                             <input class="form-control" type="file" id="avatar" name="avatar" style="opacity: 0; position: absolute; left: -9999px;" />
 
-                                            <input class="btn btn-primary btn-sm" type="submit" value="UPDATE AVATAR">
+                                            <input class="btn btn-primary btn-sm" type="submit" value="Set Avatar">
                                         </div>
                                     </form>
                                 </div>
@@ -221,8 +221,8 @@
                                     <form method="post" action="MainController">
                                         <label>
 
-                                            <input class="btn btn-danger btn-sm" type="submit" value="REMOVE AVATAR" name="action">
-
+                                            <input class="btn btn-danger btn-sm" type="submit" value="REMOVE AVATAR">
+                                            <input type="hidden" value="Delete Avatar" name="action"> 
                                         </label>
                                     </form> 
                                 </div>

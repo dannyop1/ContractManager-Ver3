@@ -226,7 +226,7 @@ public class AdminDAO {
     public static void setAvatar(String avatar, int aid){
         try {
             Connection cn = DBUtils.getConnection();
-            String sql = "update [dbo].[Admin] set [Avartar] =? where [UID]=?";
+            String sql = "update [dbo].[Admin] set [Avartar] =? where [AID]=?";
             PreparedStatement pr = cn.prepareStatement(sql);
             pr.setString(1, avatar);
             pr.setInt(2, aid);

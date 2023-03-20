@@ -55,9 +55,10 @@ public class SetAvatarServlet extends HttpServlet {
             String fileName = filePart.getSubmittedFileName();
             String[] sp = fileName.split("\\.");
             String ext = sp[(sp.length) - 1];
-            for (Part part : request.getParts()) {
-                part.write(PATH + "\\web\\images\\" + fileName);
-            }
+//            for (Part part : request.getParts()) {
+//                part.write(PATH + "\\web\\images\\" + fileName);
+//            }
+            filePart.write(PATH + "\\web\\images\\" + fileName);
             char userType = ((String) request.getSession().getAttribute("userType")).charAt(0);
             Path source = Paths.get(PATH + "\\web\\images\\" + fileName);
             String fileSName = String.valueOf(System.currentTimeMillis()) + "." + ext;
@@ -84,7 +85,7 @@ public class SetAvatarServlet extends HttpServlet {
                     request.getSession().setAttribute("user", (AdminDTO)AdminDAO.getAdminDetail(id));
                     break;
                 case 'B':
-                    url = "BoardManager.jsp";
+                    url = "BoardManagerProfile.jsp";
                     id = ((BoardManagerDTO)request.getSession().getAttribute("user")).getBID();
                     BoardManagerDAO.setAvatar(fileSName, id);
                     request.getSession().setAttribute("user", (BoardManagerDTO)BoardManagerDAO.getAccount(id));
