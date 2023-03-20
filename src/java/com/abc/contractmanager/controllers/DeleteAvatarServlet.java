@@ -67,7 +67,7 @@ public class DeleteAvatarServlet extends HttpServlet {
                     request.getSession().setAttribute("user", (AdminDTO)AdminDAO.getAdminDetail(id));
                     break;
                 case 'B':
-                    url = "BoardManager.jsp";
+                    url = "BoardManagerProfile.jsp";
                     id = ((BoardManagerDTO)request.getSession().getAttribute("user")).getBID();
                     BoardManagerDAO.setAvatar(avatarName, id);
                     request.getSession().setAttribute("user", (BoardManagerDTO)BoardManagerDAO.getAccount(id));

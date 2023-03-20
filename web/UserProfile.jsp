@@ -203,7 +203,7 @@
 
                                             <input class="form-control" type="file" id="avatar" name="avatar" style="opacity: 0; position: absolute; left: -9999px;" />
 
-                                            <input class="btn btn-primary btn-sm" type="submit" value="Set Avatar">
+                                            <input class="btn btn-primary btn-sm" type="submit" value="UPDATE AVATAR">
                                         </div>
                                     </form>
                                 </div>

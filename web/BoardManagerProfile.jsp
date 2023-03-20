@@ -229,8 +229,8 @@
                                     <form method="post" action="MainController">
                                         <label>
 
-                                            <input class="btn btn-danger btn-sm" type="submit" value="REMOVE AVATAR">
-                                            <input type="hidden" value="Delete Avatar" name="action"> 
+                                             <input class="btn btn-danger btn-sm" type="submit" value="REMOVE AVATAR">
+                                            <input type="hidden" value="Delete Avatar" name="action">  
 
                                         </label>
                                     </form> 
