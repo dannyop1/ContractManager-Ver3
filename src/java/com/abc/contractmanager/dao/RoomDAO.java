@@ -50,6 +50,31 @@ public class RoomDAO {
         return result;
     }
     
+    public static ArrayList<Integer> getAllRoomIDFree() {
+        ArrayList<Integer> result = new ArrayList<>();
+        Connection cn = null;
+        int type = 0;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT [RoID]\n"
+                        + "FROM [dbo].[Room]\n"
+                        + "where [OID] IS NULL";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        result.add(rs.getInt(1));
+                    }
+                }
+                cn.close();
+            }
+        } catch (Exception e) {
+            e.getCause();
+        } 
+        return result;
+    }
+    
     public static ArrayList<Integer> getAllRoomID(int OID) {
         ArrayList<Integer> result = new ArrayList<>();
         Connection cn = null;
@@ -95,18 +120,33 @@ public class RoomDAO {
                 pst.setInt(1, userID);
                 pst.setInt(2, roomID);
                 pst.executeUpdate();
-                System.out.println("hi");
+                cn.close();
             }
         } catch (Exception e) {
             e.getCause();
-        } finally {
-            if (cn != null) {
-                try {
-                    cn.close();
-                } catch (Exception e) {
-                }
-            }
         }
+    }
+    
+    public static boolean updateOwner(int OID, int RoID) {
+        boolean result = false;
+        Connection cn = null;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "update [dbo].[Room]\n"
+                        + "set [OID] = ?\n"
+                        + "where [RoID] = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, OID);
+                pst.setInt(2, RoID);
+                pst.executeUpdate();
+                result = true;
+                cn.close();
+            }
+        } catch (Exception e) {
+            e.getCause();
+        }
+        return result;
     }
 
     public static void updateRoomOut(int roomID) {
