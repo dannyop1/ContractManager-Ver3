@@ -163,7 +163,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="AddRoom.jsp">
+                    <a class="nav-link collapsed" href="MainController?action=GetOwner&CID=">
                         <i class="bi bi-house-add"></i>
                         <span>Add room</span>
                     </a>

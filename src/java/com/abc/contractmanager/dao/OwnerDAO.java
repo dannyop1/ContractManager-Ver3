@@ -43,9 +43,27 @@ public class OwnerDAO {
         OwnerDTO owner = null;
         try {
             Connection cn = DBUtils.getConnection();
-            String sql = "select * from [dbo].[Owner] where status=1 and [Status] =1";
+            String sql = "select * from [dbo].[Owner] where email=? and [Status] =1";
             PreparedStatement pr = cn.prepareStatement(sql);
             pr.setString(1, email);
+            ResultSet rs = pr.executeQuery();
+            if (rs.next()) {
+                owner = new OwnerDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
+            }
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return owner;
+    }
+    
+    public static OwnerDTO getOwnerByCID(String CID){
+        OwnerDTO owner = null;
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "select * from [dbo].[Owner] where [CID]= ? and [Status] =1";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setString(1, CID);
             ResultSet rs = pr.executeQuery();
             if (rs.next()) {
                 owner = new OwnerDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),rs.getInt(10));
@@ -73,6 +91,24 @@ public class OwnerDAO {
             e.printStackTrace();
         }
         return owner;
+    }
+    
+    public static String getOwnerNameByID(int OID){
+        String name = "";
+        try {
+            Connection cn = DBUtils.getConnection();
+            String sql = "select * from [dbo].[Owner] where OID = ? ";
+            PreparedStatement pr = cn.prepareStatement(sql);
+            pr.setInt(1, OID);
+            ResultSet rs = pr.executeQuery();
+            if (rs.next()) {
+                name = rs.getString(1);
+            }
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return name;
     }
     
     public static int changePass(String newPass, String email) {

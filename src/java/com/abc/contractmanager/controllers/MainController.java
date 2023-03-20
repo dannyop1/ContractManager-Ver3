@@ -143,6 +143,12 @@ public class MainController extends HttpServlet {
                 case "Delete this picture":
                     url = "DeleteRoomPictureServlet";
                     break;
+                case "GetOwner":
+                    url = "GetOwnerByCIDServlet";
+                    break;
+                case "AddRoom":
+                    url = "AddRoomForOwnerServlet";
+                    break;
             }
             request.getRequestDispatcher(url).forward(request, response);
         }

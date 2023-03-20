@@ -105,6 +105,14 @@
         <servlet-class>com.abc.contractmanager.controllers.SearchUserServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AddRoomForOwnerServlet</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.AddRoomForOwnerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetOwnerByCIDServlet</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.GetOwnerByCIDServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SearchContractForAdminServlet</servlet-name>
         <servlet-class>com.abc.contractmanager.controllers.SearchContractForAdminServlet</servlet-class>
     </servlet>
@@ -279,6 +287,14 @@
     <servlet-mapping>
         <servlet-name>DeleteRoomPictureServlet</servlet-name>
         <url-pattern>/DeleteRoomPictureServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetOwnerByCIDServlet</servlet-name>
+        <url-pattern>/GetOwnerByCIDServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRoomForOwnerServlet</servlet-name>
+        <url-pattern>/AddRoomForOwnerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
