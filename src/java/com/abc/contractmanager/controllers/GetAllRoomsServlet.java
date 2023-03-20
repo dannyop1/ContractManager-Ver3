@@ -37,7 +37,7 @@ public class GetAllRoomsServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             int OID = ((OwnerDTO)request.getSession().getAttribute("user")).getOID();
 //            int OID = 2;
-            ArrayList<Integer> roomList = RoomDAO.getAll    RoomID(OID);
+            ArrayList<Integer> roomList = RoomDAO.getAllRoomID(OID);
             request.setAttribute("roomList", roomList);
             request.getRequestDispatcher("RoomDetail.jsp").forward(request, response);
         }

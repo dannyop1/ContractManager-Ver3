@@ -49,7 +49,7 @@ public class SetAvatarServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            final String PATH = "D:\\Study\\SWP302\\contractmanager";
+            final String PATH = "E:\\STUDY DATA\\ContractManager-GITHUB\\contractmanager-ver2";
             /* TODO output your page here. You may use following sample code. */
             Part filePart = request.getPart("avatar");
             String fileName = filePart.getSubmittedFileName();

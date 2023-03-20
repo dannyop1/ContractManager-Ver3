@@ -35,7 +35,7 @@ public class GetRoomImageServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             int RoID = Integer.parseInt(request.getParameter("RoID"));
 //            int RoID = 2;
-            String path = "D:\\Study\\SWP302\\contractmanager\\" + "web\\room_images\\";
+            String path = "E:\\STUDY DATA\\ContractManager-GITHUB\\contractmanager-ver2\\" + "web\\room_images\\";
             ArrayList<String> imgList = RoomDAO.getRoomImage(RoID);
             if(imgList.size() == 0) request.setAttribute("imgListNoti", "This room does not have any image yet.");
             request.setAttribute("thisRoID", RoID);

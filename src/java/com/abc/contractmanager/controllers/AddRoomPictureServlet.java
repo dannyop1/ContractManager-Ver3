@@ -50,7 +50,7 @@ public class AddRoomPictureServlet extends HttpServlet {
             String[] sp;
             String ext, fileName, paths;
             Path source;
-            String path = "D:\\Study\\SWP302\\contractmanager\\" + "web\\room_images\\";
+            String path = "E:\\STUDY DATA\\ContractManager-GITHUB\\contractmanager-ver2\\" + "web\\room_images\\";
             Collection<Part> a = request.getParts();
             for (Part part : request.getParts()) {
                 fileName = part.getSubmittedFileName();
