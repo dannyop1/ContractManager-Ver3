@@ -192,26 +192,45 @@
                                 <h2>${sessionScope.user.getFullName()}</h2>
 
                             </div>
-                           
-                                <div class="col-md-8 col-lg-4">     
-                            <form method="post" action="SetAvatarServlet" enctype="multipart/form-data" style="display: inline-flex;">
-                                <div style="display: flex; flex-direction: column;">
-                                <label for="avatar" class="file-upload">
-                                    <input type="file" id="avatar" name="avatar" style="display:none;">
-                                    <i class="btn btn-primary btn-sm bi bi-upload"></i>
-                                </label>
-                                    <br>
-                                <input class="btn btn-primary btn-sm" type="submit" value="Upload">
-                                </form></div>
-                                <form method="post" action="MainController" style="display: inline-flex;">
-                                    <label>
-                                        
-                                    <input type="submit" value="Delete Avatar" name="action" style="display:none;">
-                                    <i class="btn btn-danger btn-sm bi bi-trash"></i>
-                                    </label>
-                                </form> 
-                                </div>  
-                                
+
+                            <div class="d-flex flex-column align-items-center">     
+                                <div class="p-2">
+                                    <form method="post" action="SetAvatarServlet" enctype="multipart/form-data">
+                                        <div>
+                                            <label for="avatar" class="custom-file-upload">
+                                                <i class="btn btn-primary btn-sm bi bi-upload"></i>
+                                            </label>
+
+                                            <input class="form-control" type="file" id="avatar" name="avatar" style="opacity: 0; position: absolute; left: -9999px;" />
+
+                                            <input class="btn btn-primary btn-sm" type="submit" value="UPDATE AVATAR">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <style>
+                                    .custom-file-upload {
+                                        display: inline-block;
+                                        padding: 6px 12px;
+                                        cursor: pointer;
+                                        color: #fff;
+
+                                    }
+                                </style>
+                                <div class="p-2">
+                                    <form method="post" action="MainController">
+                                        <label>
+
+                                            <input class="btn btn-danger btn-sm" type="submit" value="REMOVE AVATAR" name="action">
+
+                                        </label>
+                                    </form> 
+                                </div>
+
+
+
+                            </div>  
+
                         </div>
 
                     </div>
@@ -287,16 +306,7 @@
                                             <c:if test="${edit == 'true'}">
 
                                                 <form action="MainController">
-                                                    <div class="row mb-3">
-                                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <img src="images/${sessionScope.user.getAvatar()}" alt="Profile">
-                                                            <div class="pt-2">
-                                                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
 
                                                     <div class="row mb-3">
                                                         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name: </label>
@@ -360,12 +370,7 @@
 
 
 
-                                                    <div class="row mb-3">
-                                                        <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                                                        <div class="col-md-8 col-lg-9">
-                                                            <input name="email" type="email" class="form-control" id="Email" value="${requestScope.viewProfile.getEmail()}">
-                                                        </div>
-                                                    </div>
+                                                  
 
 
 
