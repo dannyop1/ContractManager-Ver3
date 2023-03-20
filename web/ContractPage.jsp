@@ -172,6 +172,14 @@
                      
                     </ul>
                 </li>
+                <c:if test="${sessionScope.userType == 'O'}">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="MainController?action=ViewAllRoom">
+                        <i class="bi bi-house-add"></i>
+                        <span>Room</span>
+                    </a>
+                </li>
+                </c:if>
                 <!-- End Profile Page Nav -->
 
 

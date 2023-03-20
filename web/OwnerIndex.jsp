@@ -158,7 +158,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="MainController?action=ViewAllRoom">
-                        <i class="bi bi-person-badge"></i>
+                        <i class="bi bi-house-add"></i>
                         <span>Room</span>
                     </a>
                 </li>
