@@ -220,7 +220,7 @@
                     <li class="nav-item dropdown pe-3">
 
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                            <img src="images/${sessionScope.user.getAvatar()}" alt="Profile" class="rounded-circle">
                             <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.user.getFullName()}</span>
                         </a><!-- End Profile Iamge Icon -->
 
@@ -342,7 +342,7 @@
                         <div class="card">
                             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                                <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                                <img src="images/${sessionScope.user.getAvatar()}" alt="Profile" class="rounded-circle">
                                 <h2>${sessionScope.user.getFullName()}</h2>
 
                             </div>
@@ -410,6 +410,9 @@
                                             <input type="file" name="avatar">
                                             <input type="submit" value="Upload">
                                         </form>
+                                        <form method="post" action="MainController">
+                                            <input type="submit" value="Delete Avatar" name="action">
+                                        </form>
 
 
 
@@ -427,7 +430,7 @@
                                                     <div class="row mb-3">
                                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                                         <div class="col-md-8 col-lg-9">
-                                                            <img src="assets/img/profile-img.jpg" alt="Profile">
+                                                            <img src="images/${sessionScope.user.getAvatar()}" alt="Profile">
                                                             <div class="pt-2">
                                                                 <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                                                                 <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>

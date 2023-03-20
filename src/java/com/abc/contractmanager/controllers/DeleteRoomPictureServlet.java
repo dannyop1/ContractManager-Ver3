@@ -5,9 +5,7 @@
  */
 package com.abc.contractmanager.controllers;
 
-import com.abc.contractmanager.dao.ContractDAO;
-import com.abc.contractmanager.dao.UserDAO;
-import com.abc.contractmanager.dto.UserDTO;
+import com.abc.contractmanager.dao.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mical
  */
-public class SubmitContractServlet extends HttpServlet {
+public class DeleteRoomPictureServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,15 +33,12 @@ public class SubmitContractServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int CoID = Integer.parseInt(request.getParameter("CoID"));
-            ContractDAO.submitContract(CoID);
-            UserDTO user = (UserDTO) request.getSession().getAttribute("user");
-            if(user.getStatus() == 0) {
-                UserDAO.upRoleResident(CoID);
-                request.getSession().setAttribute("user", UserDAO.getUserByUID(user.getUID()));
-            }
-            
-            response.sendRedirect("FindTwoContractsServlet");
+            int RoID = Integer.parseInt(request.getParameter("RoID"));
+            String img = request.getParameter("img");
+            out.print(RoID);
+            out.print(" : " + img);
+            RoomDAO.deleteRoomPicture(img, RoID);
+            response.sendRedirect("GetRoomImageServlet?RoID="+RoID);
         }
     }
 

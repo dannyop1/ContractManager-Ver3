@@ -120,6 +120,26 @@
         <servlet-name>SetAvatarServlet</servlet-name>
         <servlet-class>com.abc.contractmanager.controllers.SetAvatarServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteAvatarServlet</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.DeleteAvatarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddRoomPictureServlet</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.AddRoomPictureServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetRoomImageServlet</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.GetRoomImageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllRoomsServlet</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.GetAllRoomsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRoomPictureServlet</servlet-name>
+        <servlet-class>com.abc.contractmanager.controllers.DeleteRoomPictureServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -239,6 +259,26 @@
     <servlet-mapping>
         <servlet-name>SetAvatarServlet</servlet-name>
         <url-pattern>/SetAvatarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAvatarServlet</servlet-name>
+        <url-pattern>/DeleteAvatarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRoomPictureServlet</servlet-name>
+        <url-pattern>/AddRoomPictureServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetRoomImageServlet</servlet-name>
+        <url-pattern>/GetRoomImageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllRoomsServlet</servlet-name>
+        <url-pattern>/GetAllRoomsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRoomPictureServlet</servlet-name>
+        <url-pattern>/DeleteRoomPictureServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

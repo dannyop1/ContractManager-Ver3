@@ -357,7 +357,7 @@ public class UserDAO {
     public static void setAvatar(String avatar, int uid){
         try {
             Connection cn = DBUtils.getConnection();
-            String sql = "update [dbo].[User] set [Avatar] =? where [UID]=?";
+            String sql = "update [dbo].[User] set [Avartar] =? where [UID]=?";
             PreparedStatement pr = cn.prepareStatement(sql);
             pr.setString(1, avatar);
             pr.setInt(2, uid);

@@ -116,7 +116,7 @@ public class BoardManagerDAO {
     public static void setAvatar(String avatar, int bid){
         try {
             Connection cn = DBUtils.getConnection();
-            String sql = "update [dbo].[BoardManager] set [Avatar] =? where [UID]=?";
+            String sql = "update [dbo].[BoardManager] set [Avartar] =? where [UID]=?";
             PreparedStatement pr = cn.prepareStatement(sql);
             pr.setString(1, avatar);
             pr.setInt(2, bid);

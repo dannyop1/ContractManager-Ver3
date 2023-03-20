@@ -216,7 +216,7 @@ public class OwnerDAO {
     public static void setAvatar(String avatar, int oid){
         try {
             Connection cn = DBUtils.getConnection();
-            String sql = "update [dbo].[Owner] set [Avatar] =? where [UID]=?";
+            String sql = "update [dbo].[Owner] set [Avartar] =? where [UID]=?";
             PreparedStatement pr = cn.prepareStatement(sql);
             pr.setString(1, avatar);
             pr.setInt(2, oid);

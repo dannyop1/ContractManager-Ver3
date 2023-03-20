@@ -131,6 +131,18 @@ public class MainController extends HttpServlet {
                 case "Set Avatar":
                     url = "SetAvatarServlet";
                     break;
+                case "Delete Avatar":
+                    url = "DeleteAvatarServlet";
+                    break;   
+                case "GetRoomForImg":
+                    url = "GetRoomImageServlet";
+                    break;
+                case "ViewAllRoom":
+                    url = "GetAllRoomsServlet";
+                    break;
+                case "Delete this picture":
+                    url = "DeleteRoomPictureServlet";
+                    break;
             }
             request.getRequestDispatcher(url).forward(request, response);
         }

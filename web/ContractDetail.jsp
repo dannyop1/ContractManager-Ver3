@@ -403,7 +403,8 @@
                                 <p class="card-text"><b>Rental fee:</b> $${contract.getRentalFee()}</p>
                                 <p class="card-text"><b>Sign contract: </b> 
                                 <form action="MainController" method="post">
-                                    <input type="submit" name="action" value="Sign this Contract"/>
+                                    <input type="submit" value="Sign this Contract"/>
+                                    <input type="hidden" value="Submit Contract" name="action">
                                     <input type="hidden" name="CoID" value="${contract.getCoID()}"/>
                                 </form>
                                 </p>

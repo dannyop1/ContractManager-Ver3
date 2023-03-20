@@ -5,21 +5,31 @@
  */
 package com.abc.contractmanager.controllers;
 
-import com.abc.contractmanager.dao.ContractDAO;
-import com.abc.contractmanager.dao.UserDAO;
-import com.abc.contractmanager.dto.UserDTO;
+import com.abc.contractmanager.dao.RoomDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collection;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author mical
  */
-public class SubmitContractServlet extends HttpServlet {
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 1, //1MB
+        maxFileSize = 1024 * 1024 * 10,      //10MB
+        maxRequestSize = 1024 * 1024 * 100   //100MB
+)
+
+public class AddRoomPictureServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,17 +44,37 @@ public class SubmitContractServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            int CoID = Integer.parseInt(request.getParameter("CoID"));
-            ContractDAO.submitContract(CoID);
-            UserDTO user = (UserDTO) request.getSession().getAttribute("user");
-            if(user.getStatus() == 0) {
-                UserDAO.upRoleResident(CoID);
-                request.getSession().setAttribute("user", UserDAO.getUserByUID(user.getUID()));
+            Part p = request.getPart("picture");
+            int RoID = Integer.parseInt(request.getParameter("RoID"));
+//            Collection<Part> q = request.getParts();
+            String[] sp;
+            String ext, fileName, paths;
+            Path source;
+            String path = "D:\\Study\\SWP302\\contractmanager\\" + "web\\room_images\\";
+            Collection<Part> a = request.getParts();
+            for (Part part : request.getParts()) {
+                fileName = part.getSubmittedFileName();
+                part.write(path + fileName);
+                sp = part.getSubmittedFileName().split("\\.");
+                ext = sp[(sp.length)-1];
+                source = Paths.get(path + fileName);
+                paths = String.valueOf(System.currentTimeMillis()) + "." + ext;
+                Files.move(source, source.resolveSibling(paths));
+                RoomDAO.addRoomPicture(paths, RoID);
             }
-            
-            response.sendRedirect("FindTwoContractsServlet");
+            response.sendRedirect("GetRoomImageServlet?RoID=" + RoID);
         }
+    }
+
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length() - 1);
+            }
+        }
+        return "";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

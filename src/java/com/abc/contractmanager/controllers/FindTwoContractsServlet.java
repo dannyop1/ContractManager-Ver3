@@ -6,6 +6,7 @@
 package com.abc.contractmanager.controllers;
 
 import com.abc.contractmanager.dao.ContractDAO;
+import com.abc.contractmanager.dao.RoomDAO;
 import com.abc.contractmanager.dto.AdminDTO;
 import com.abc.contractmanager.dto.BoardManagerDTO;
 import com.abc.contractmanager.dto.ContractDTO;
@@ -80,7 +81,11 @@ public class FindTwoContractsServlet extends HttpServlet {
                 request.setAttribute("contractStats", 0); //contractStat = 0: Co 1 contract
                 listContract=allListContract;
             } else request.setAttribute("contractStats", -1); //contractStat = -1 : khong co
-
+            ArrayList<String> img = new ArrayList<>();
+            for (ContractDTO contract : listContract) {
+                img.add(RoomDAO.getRoomImg(contract.getRoID()));
+            }
+            request.setAttribute("imgList", img);
             request.setAttribute("contractList", listContract);
             out.print("url: " + url);
             out.print("<br/>listContract: " + listContract.size());

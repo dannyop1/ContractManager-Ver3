@@ -292,7 +292,7 @@
                         <span>Profile</span>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-layout-text-window-reverse"></i><span>Contract</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -309,6 +309,12 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="MainController?action=ViewAllRoom">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Room</span>
+                    </a>
                 </li>
                 <!-- End Profile Page Nav -->
 
@@ -357,19 +363,15 @@
 
 
 
-
+                    <c:set var="imgList" value="${requestScope.imgList}"/>
                     <c:forEach var="contract" varStatus="counter" items="${requestScope.contractList}">
 
                         <div class="col-lg-4">
 
                             <!-- Card with an image on top -->
                             <div class="card">
-                                <c:if test="${counter.count%6 == 0}"><img src="assets/img/card.jpg" class="card-img-top" alt="..."></c:if>
-                                <c:if test="${counter.count%6 == 1}"><img src="assets/img/card1.jpg" class="card-img-top" alt="..."></c:if>
-                                <c:if test="${counter.count%6 == 2}"><img src="assets/img/card2.jpg" class="card-img-top" alt="..."></c:if>
-                                <c:if test="${counter.count%6 == 3}"><img src="assets/img/card3.jpg" class="card-img-top" alt="..."></c:if>
-                                <c:if test="${counter.count%6 == 4}"><img src="assets/img/card4.jpg" class="card-img-top" alt="..."></c:if>
-                                <c:if test="${counter.count%6 == 5}"><img src="assets/img/card5.jpg" class="card-img-top" alt="..."></c:if>
+                                <img src="room_images/${imgList.get(counter.index)}" class="card-img-top" alt="...">
+                                
                                     <div class="card-body">
                                         <h5 class="card-title"> ${contract.getName()}</h5>                                    
                                     <p class="card-text"><b>BETWEEN:</b> ${contract.getUName()} and ${contract.getOName()} </p>

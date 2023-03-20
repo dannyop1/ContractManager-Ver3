@@ -49,41 +49,45 @@ public class SetAvatarServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            final String PATH = "D:\\Study\\SWP302\\contractmanager\\web\\images\\";
+            final String PATH = "D:\\Study\\SWP302\\contractmanager";
             /* TODO output your page here. You may use following sample code. */
             Part filePart = request.getPart("avatar");
             String fileName = filePart.getSubmittedFileName();
             String[] sp = fileName.split("\\.");
             String ext = sp[(sp.length) - 1];
             for (Part part : request.getParts()) {
-                part.write("D:\\Study\\SWP302\\contractmanager\\web\\images\\" + fileName);
+                part.write(PATH + "\\web\\images\\" + fileName);
             }
             char userType = ((String) request.getSession().getAttribute("userType")).charAt(0);
-            Path source = Paths.get(PATH + fileName);
+            Path source = Paths.get(PATH + "\\web\\images\\" + fileName);
             String fileSName = String.valueOf(System.currentTimeMillis()) + "." + ext;
-            Files.move(source, source.resolveSibling(fileName));
+            Files.move(source, source.resolveSibling(fileSName));
             String url = "";
             int id = 0;
             switch (userType) {
                 case 'O':
                     url = "OwnerProfile.jsp";
                     id = ((OwnerDTO)request.getSession().getAttribute("user")).getOID();
-                    OwnerDAO.setAvatar(PATH, id);
+                    OwnerDAO.setAvatar(fileSName, id);
+                    request.getSession().setAttribute("user", (OwnerDTO)OwnerDAO.getOwnerByOID(id));
                     break;
                 case 'U':
                     url = "UserProfile.jsp";
                     id = ((UserDTO)request.getSession().getAttribute("user")).getUID();
-                    UserDAO.setAvatar(PATH, id);
+                    UserDAO.setAvatar(fileSName, id);
+                    request.getSession().setAttribute("user", (UserDTO)UserDAO.getUserByUID(id));
                     break;
                 case 'A':
                     url = "AdminProfile.jsp";
                     id = ((AdminDTO)request.getSession().getAttribute("user")).getAID();
-                    AdminDAO.setAvatar(PATH, id);
+                    AdminDAO.setAvatar(fileSName, id);
+                    request.getSession().setAttribute("user", (AdminDTO)AdminDAO.getAdminDetail(id));
                     break;
                 case 'B':
                     url = "BoardManager.jsp";
                     id = ((BoardManagerDTO)request.getSession().getAttribute("user")).getBID();
-                    BoardManagerDAO.setAvatar(PATH, id);
+                    BoardManagerDAO.setAvatar(fileSName, id);
+                    request.getSession().setAttribute("user", (BoardManagerDTO)BoardManagerDAO.getAccount(id));
                     break;
             }
 
